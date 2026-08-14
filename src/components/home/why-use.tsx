@@ -28,7 +28,7 @@ const BENEFITS = [
   {
     icon: Flame,
     title: "A finish line in the status bar",
-    body: `${UNLOCK_LINES} lines unlock ${UNLOCK_PLAYS} plays, shared across Debug Snake and Whack-a-Bug. Seeing the count tick up is a reason to keep going without leaving your flow.`,
+    body: `${UNLOCK_LINES} lines unlock ${UNLOCK_PLAYS} plays, shared across every game. Seeing the count tick up is a reason to keep going without leaving your flow.`,
   },
   {
     icon: HeartPulse,

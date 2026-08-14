@@ -33,7 +33,7 @@ export default async function DocumentationPage({
   return (
     <PageShell
       title="Documentation"
-      description="Install the extension, then write code until the status bar unlocks plays for Debug Snake and Whack-a-Bug."
+      description="Install the extension, then write code until the status bar unlocks plays for in-editor games."
     >
       <DocumentationTabs defaultTab={resolveTab(params)} />
     </PageShell>

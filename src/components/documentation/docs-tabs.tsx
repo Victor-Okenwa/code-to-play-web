@@ -94,8 +94,8 @@ export function DocumentationTabs({ defaultTab }: { defaultTab: DocTab }) {
             <span className="font-mono text-xs">{UNLOCK_PLAYS} plays</span>
           </li>
           <li>
-            Open the Code to Play view in the Activity Bar, pick Debug Snake or
-            Whack-a-Bug, and spend a play.
+            Open the Code to Play view in the Activity Bar, pick a game, and
+            spend a play.
           </li>
         </ul>
       </TabsContent>

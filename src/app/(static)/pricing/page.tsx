@@ -37,8 +37,7 @@ export default function PricingPage() {
           <CardTitle className="font-heading text-2xl">Free</CardTitle>
           <CardDescription>
             Install once. Unlock {UNLOCK_PLAYS} plays per {UNLOCK_LINES}{" "}
-            meaningful lines. Both games, local high scores, and stats are
-            included.
+            meaningful lines. Games, local high scores, and stats are included.
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">

@@ -123,7 +123,7 @@ export const FEATURES = [
   {
     id: "progressive-unlock",
     title: "Progressive unlock",
-    body: `${UNLOCK_LINES} meaningful lines unlock ${UNLOCK_PLAYS} plays, shared across Debug Snake and Whack-a-Bug. The status bar shows progress while you work, then remaining plays once you unlock.`,
+    body: `${UNLOCK_LINES} meaningful lines unlock ${UNLOCK_PLAYS} plays, shared across every game. The status bar shows progress while you work, then remaining plays once you unlock.`,
     home: true,
   },
   {
@@ -141,7 +141,7 @@ export const FEATURES = [
   {
     id: "in-editor-games",
     title: "Games in the editor",
-    body: "Debug Snake and Whack-a-Bug open as a webview. Spend a play without leaving your files or your cursor.",
+    body: "Games open as a webview. Spend a play without leaving your files or your cursor.",
     home: false,
   },
   {
@@ -159,7 +159,7 @@ export const FEATURES = [
   {
     id: "free",
     title: "Free to install",
-    body: "Install from the VS Code Marketplace or Open VSX. Both games, local high scores, and stats are included — no account, no subscription.",
+    body: "Install from the VS Code Marketplace or Open VSX. Games, local high scores, and stats are included — no account, no subscription.",
     home: false,
   },
 ] as const;

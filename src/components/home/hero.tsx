@@ -97,9 +97,9 @@ export function Hero() {
               className="max-w-lg text-xs leading-relaxed text-muted-foreground sm:text-sm"
               variants={copyReveal}
             >
-              Write real code in VS Code and earn plays for Debug Snake and
-              Whack-a-Bug. Stay focused, ship features, then take a break
-              in-editor.
+              Write real code in VS Code and earn plays for in-editor games.
+              Stay focused, ship features, then take a break without leaving
+              your files.
             </motion.p>
           </motion.section>
 

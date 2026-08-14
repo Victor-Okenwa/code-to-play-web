@@ -61,8 +61,8 @@ export function FeatureVisual({
       return (
         <NoteVisual
           icon={Trophy}
-          title="Both games included"
-          body="Debug Snake, Whack-a-Bug, high scores, and stats ship with the free install."
+          title="Games included"
+          body="In-editor games, high scores, and stats ship with the free install."
         />
       );
     default:

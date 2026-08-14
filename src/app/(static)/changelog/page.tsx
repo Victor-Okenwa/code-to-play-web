@@ -19,7 +19,7 @@ const RELEASES = [
     date: "2026",
     items: [
       `Unlock ${UNLOCK_PLAYS} plays per ${UNLOCK_LINES} meaningful lines, shared across games.`,
-      "Debug Snake and Whack-a-Bug in the editor.",
+      "In-editor games.",
       "Status bar progress while locked, remaining plays when unlocked.",
       "High scores and stats stored locally — no telemetry.",
     ],
