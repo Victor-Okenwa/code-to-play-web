@@ -5,7 +5,7 @@ import { DownloadIcon } from "lucide-react";
 import { animate, motion, useInView } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { EditorMock } from "@/components/assets/mock";
+import { EditorMock } from "@/components/assets/editor-mock";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
