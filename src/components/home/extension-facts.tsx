@@ -26,7 +26,7 @@ const FACTS = [
 
 export function ExtensionFacts() {
   return (
-    <section className="bg-muted px-4 py-12 sm:px-6 sm:py-14">
+    <section className="border-y px-4 py-12 sm:px-6 sm:py-14">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-8 text-center">
         <h2 className="text-sm font-semibold tracking-wide text-foreground uppercase sm:text-base">
           Built for Hardcore Developers
