@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { EditorMock } from "@/components/assets/editor-mock";
 import { buttonVariants } from "@/components/ui/button";
+import { copyReveal, copyRevealStagger } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 const OPEN_VSX_INSTALL_URL =
@@ -17,16 +18,6 @@ const STATS = {
   installs: 1500,
   languages: 30,
 } as const;
-
-const copyReveal = {
-  hidden: { y: -30, filter: "blur(12px)", opacity: 0 },
-  visible: {
-    y: 0,
-    filter: "blur(0px)",
-    opacity: 1,
-    transition: { duration: 0.7, ease: "easeOut" as const },
-  },
-};
 
 type AnimatedCounterProps = {
   to: number;
@@ -94,10 +85,7 @@ export function Hero() {
             className="space-y-4"
             initial="hidden"
             animate="visible"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.14 } },
-            }}
+            variants={copyRevealStagger}
           >
             <motion.h1
               className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-6xl"

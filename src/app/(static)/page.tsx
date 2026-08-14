@@ -1,9 +1,7 @@
-"use client";
-
 import { ExtensionFacts } from "@/components/home/extension-facts";
+import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
 import { WhyUse } from "@/components/home/why-use";
-import { Features } from "@/components/home/features";
 import { Separator } from "@/components/ui/separator";
 
 export default function Home() {

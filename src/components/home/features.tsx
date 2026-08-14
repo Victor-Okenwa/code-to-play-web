@@ -1,29 +1,36 @@
-"use client";
-import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+
+import { FeatureCard } from "@/components/features/feature-card";
+import { FeaturesHeading } from "@/components/home/features-heading";
+import { buttonVariants } from "@/components/ui/button";
+import { HOME_FEATURES } from "@/lib/features";
+import { cn } from "@/lib/utils";
 
 export function Features() {
-    return (
-        <section className="px-4 py-12 sm:px-6 sm:py-14">
-            <motion.hgroup
-                className="flex flex-col items-center gap-3 text-center"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.6 }}
-                variants={{
-                    hidden: {},
-                    visible: { transition: { staggerChildren: 0.14 } },
-                }}
-            >                <motion.p className="text-xs font-semibold tracking-wide text-primary uppercase">
-                    Features
-                </motion.p>
-                <motion.h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-                    Everything you need to play while you work
-                </motion.h2>
+  return (
+    <section className="px-4 py-12 sm:px-6 sm:py-14">
+      <div className="mx-auto flex max-w-6xl flex-col gap-10">
+        <FeaturesHeading />
 
-                <motion.p className="max-w-2xl text-lg text-muted-foreground">
-                    A complete gamification toolkit that lives in your IDE.
-                </motion.p>
-            </motion.hgroup>
-        </section>
-    );
+        <ul className="flex flex-col gap-4">
+          {HOME_FEATURES.map((feature, index) => (
+            <li key={feature.id}>
+              <FeatureCard feature={feature} index={index} variant="preview" />
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex justify-center">
+          <Link
+            href="/features"
+            className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+          >
+            See all features
+            <ArrowRight />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
 }
