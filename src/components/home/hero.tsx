@@ -2,16 +2,13 @@
 
 import type { ClassValue } from "clsx";
 import { DownloadIcon } from "lucide-react";
-import { animate, useInView } from "motion/react";
+import { animate, motion, useInView } from "motion/react";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
-
 import { EditorMock } from "@/components/assets/editor-mock";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 
-const VS_CODE_INSTALL_URL =
-  "https://marketplace.visualstudio.com/items?itemName=morse-code.code-to-play";
 const OPEN_VSX_INSTALL_URL =
   "https://open-vsx.org/extension/morse-code/code-to";
 
@@ -20,6 +17,16 @@ const STATS = {
   installs: 1500,
   languages: 30,
 } as const;
+
+const copyReveal = {
+  hidden: { y: -30, filter: "blur(12px)", opacity: 0 },
+  visible: {
+    y: 0,
+    filter: "blur(0px)",
+    opacity: 1,
+    transition: { duration: 0.7, ease: "easeOut" as const },
+  },
+};
 
 type AnimatedCounterProps = {
   to: number;
@@ -38,7 +45,12 @@ function formatShortNumber(num: number): string {
   return num.toLocaleString();
 }
 
-function AnimatedCounter({ to, suffix = "", className, shorten = false }: AnimatedCounterProps) {
+function AnimatedCounter({
+  to,
+  suffix = "",
+  className,
+  shorten = false,
+}: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.6 });
 
@@ -75,24 +87,41 @@ function AnimatedCounter({ to, suffix = "", className, shorten = false }: Animat
 
 export function Hero() {
   return (
-    <article className="bg-linear-to-b from-primary/10 to-background">
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-20">
-        <div className="flex flex-col gap-8">
-          <section className="space-y-4">
-            <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-6xl">
+    <article className="overflow-x-clip bg-linear-to-b from-primary/10 to-background">
+      <div className="flex flex-col gap-10 py-12 lg:flex-row lg:items-center lg:gap-10 lg:py-20">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 sm:px-6 lg:mx-0 lg:max-w-xl lg:shrink-0 lg:pl-[max(1rem,calc((100vw-72rem)/2+1rem))] lg:pr-0">
+          <motion.section
+            className="space-y-4"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.14 } },
+            }}
+          >
+            <motion.h1
+              className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-6xl"
+              variants={copyReveal}
+            >
               Earn playtime by writing code
-            </h1>
-            <p className="max-w-lg text-xs leading-relaxed text-muted-foreground sm:text-sm">
+            </motion.h1>
+            <motion.p
+              className="max-w-lg text-xs leading-relaxed text-muted-foreground sm:text-sm"
+              variants={copyReveal}
+            >
               Write real code in VS Code and earn plays for Debug Snake and
               Whack-a-Bug. Stay focused, ship features, then take a break
               in-editor.
-            </p>
-          </section>
+            </motion.p>
+          </motion.section>
 
           <section className="flex flex-wrap items-center gap-3">
             <Link
               href="/documentation?tab=installation"
-              className={cn(buttonVariants({ variant: "default", size: "lg" }), "h-13 px-8 grow")}
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "h-13 px-8 grow",
+              )}
             >
               <DownloadIcon />
               Install Extension
@@ -101,7 +130,10 @@ export function Hero() {
               href={OPEN_VSX_INSTALL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "h-13 px-8 grow")}
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "lg" }),
+                "h-13 px-8 grow",
+              )}
             >
               <DownloadIcon />
               Explore Pro
@@ -136,8 +168,8 @@ export function Hero() {
           </section>
         </div>
 
-        <section className="min-w-0">
-          <EditorMock className="w-full" />
+        <section className="min-w-0 px-4 sm:px-6 lg:flex-1 lg:px-0">
+          <EditorMock className="w-full lg:rounded-r-none" />
         </section>
       </div>
     </article>
