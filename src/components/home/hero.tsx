@@ -120,7 +120,7 @@ export function Hero() {
               href="/documentation?tab=installation"
               className={cn(
                 buttonVariants({ variant: "default", size: "lg" }),
-                "h-13 px-8 grow",
+                "h-13 px-8 max-sm:grow font-bold",
               )}
             >
               <DownloadIcon />
@@ -131,8 +131,8 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
-                buttonVariants({ variant: "ghost", size: "lg" }),
-                "h-13 px-8 grow",
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "h-13 px-8 max-sm:grow font-bold",
               )}
             >
               <DownloadIcon />
