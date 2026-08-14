@@ -75,14 +75,14 @@ function AnimatedCounter({ to, suffix = "", className, shorten = false }: Animat
 
 export function Hero() {
   return (
-    <article className="bg-linear-to-b from-primary/5 to-background">
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 pl-4 pr-0 py-12 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-20">
+    <article className="bg-linear-to-b from-primary/10 to-background">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:py-20">
         <div className="flex flex-col gap-8">
           <section className="space-y-4">
-            <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+            <h1 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-6xl">
               Earn playtime by writing code
             </h1>
-            <p className="max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="max-w-lg text-xs leading-relaxed text-muted-foreground sm:text-sm">
               Write real code in VS Code and earn plays for Debug Snake and
               Whack-a-Bug. Stay focused, ship features, then take a break
               in-editor.
@@ -92,7 +92,7 @@ export function Hero() {
           <section className="flex flex-wrap items-center gap-3">
             <Link
               href="/documentation?tab=installation"
-              className={cn(buttonVariants({ variant: "default", size: "lg" }), "h-13 px-8")}
+              className={cn(buttonVariants({ variant: "default", size: "lg" }), "h-13 px-8 grow")}
             >
               <DownloadIcon />
               Install Extension
@@ -101,7 +101,7 @@ export function Hero() {
               href={OPEN_VSX_INSTALL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "h-13 px-8")}
+              className={cn(buttonVariants({ variant: "ghost", size: "lg" }), "h-13 px-8 grow")}
             >
               <DownloadIcon />
               Explore Pro
