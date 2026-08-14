@@ -14,7 +14,6 @@ const OPEN_VSX_INSTALL_URL =
   "https://open-vsx.org/extension/morse-code/code-to";
 
 const STATS = {
-  version: "1.0.0",
   installs: 1500,
   languages: 30,
 } as const;
@@ -52,7 +51,7 @@ function AnimatedCounter({
     }
 
     const controls = animate(0, to, {
-      duration: 1.4,
+      duration: 5,
       ease: "easeOut",
       onUpdate(value) {
         let displayValue: string;
@@ -129,14 +128,6 @@ export function Hero() {
           </section>
 
           <section className="flex flex-wrap gap-6 sm:gap-10">
-            <div className="space-y-1">
-              <p className="font-mono text-2xl font-medium tracking-tight sm:text-3xl">
-                v{STATS.version}
-              </p>
-              <p className="text-xs tracking-wide text-muted-foreground uppercase">
-                Current version
-              </p>
-            </div>
             <div className="space-y-1">
               <p className="font-mono text-2xl font-medium tracking-tight sm:text-3xl">
                 <AnimatedCounter to={STATS.installs} shorten suffix="+" />
