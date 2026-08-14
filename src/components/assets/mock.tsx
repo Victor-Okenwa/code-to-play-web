@@ -5,7 +5,9 @@ import {
   CircleUser,
   CircleX,
   Files,
+  Folder,
   GitBranch,
+  Play,
   Puzzle,
   Search,
   Settings,
@@ -94,7 +96,7 @@ export function EditorMock({ className }: { className?: ClassValue }) {
         className,
       )}
       role="img"
-      aria-label="Code to Play running inside VS Code: the activity bar has Code to Play selected, the editor shows game-object.ts with main.rs in another tab, and the status bar reads Code to Play (5)."
+      aria-label="Code to Play running inside VS Code: the Available Games sidebar lists Debug Snake and Whack-a-Bug with 5 plays each, the editor shows game-object.ts with main.rs in another tab, and the status bar reads Code to Play (5)."
     >
       <div className="flex items-center gap-2 border-b border-editor-border bg-editor-panel px-3 py-2">
         <span className="size-2.5 rounded-full bg-[oklch(0.7_0.16_25)]" />
@@ -105,7 +107,7 @@ export function EditorMock({ className }: { className?: ClassValue }) {
         </span>
       </div>
 
-      <div className="grid grid-cols-[44px_1fr] sm:grid-cols-[44px_150px_1fr]">
+      <div className="grid grid-cols-[44px_1fr] sm:grid-cols-[44px_200px_1fr]">
         <div className="flex flex-col items-center self-stretch border-r border-editor-border bg-editor-panel py-1">
           <ActivityIcon>
             <Files className="size-4.5" />
@@ -135,17 +137,24 @@ export function EditorMock({ className }: { className?: ClassValue }) {
           </div>
         </div>
 
-        <div className="hidden flex-col gap-1.5 border-r border-editor-border px-3 py-3 font-mono text-[11px] text-editor-foreground/55 sm:flex">
+        <div className="hidden flex-col gap-2 self-stretch border-r border-editor-border px-2.5 py-3 font-mono text-[11px] text-editor-foreground/70 sm:flex">
           <span className="tracking-widest text-editor-foreground/40 uppercase">
-            Explorer
+            Available Games
           </span>
-          <span>src/</span>
-          <span className="pl-3 text-primary">tracker.ts</span>
-          <span className="pl-3">games/</span>
-          <span className="pl-6">snake.ts</span>
-          <span className="pl-6">whack.ts</span>
-          <span className="pl-3">status-bar.ts</span>
-          <span>package.json</span>
+          <span className="flex items-center gap-1.5">
+            <Play className="size-3 fill-primary text-primary" />
+            Plays remaining: 5
+          </span>
+          <span className="mt-1 flex items-center gap-1 text-editor-foreground/50">
+            <Folder className="size-3" />
+            Free Games
+          </span>
+          <GameRow name="Debug Snake" plays={5} />
+          <GameRow name="Whack-a-Bug" plays={5} />
+          <div className="mt-auto flex flex-col gap-1.5 pt-3 text-editor-foreground/50">
+            <span>View Statistics</span>
+            <span>Export Statistics</span>
+          </div>
         </div>
 
         <div className="min-w-0">
@@ -187,8 +196,8 @@ export function EditorMock({ className }: { className?: ClassValue }) {
               </span>
             </div>
             <div className="mt-2.5 grid grid-cols-2 gap-2">
-              <GameTile name="Debug Snake" score="High score 1,240" />
-              <GameTile name="Whack-a-Bug" score="High score 86" />
+              <GameTile name="Debug Snake" plays={5} />
+              <GameTile name="Whack-a-Bug" plays={5} />
             </div>
           </div>
         </div>
@@ -216,13 +225,26 @@ export function EditorMock({ className }: { className?: ClassValue }) {
   );
 }
 
-function GameTile({ name, score }: { name: string; score: string }) {
+function GameRow({ name, plays }: { name: string; plays: number }) {
   return (
-    <div className="rounded-md border border-editor-border bg-editor px-2.5 py-2">
-      <p className="text-[11px] font-medium">{name}</p>
-      <p className="mt-0.5 font-mono text-[10px] text-editor-foreground/45">
-        {score}
-      </p>
+    <div className="flex items-center justify-between gap-1 pl-3">
+      <span className="truncate text-editor-foreground">{name}</span>
+      <span className="flex shrink-0 items-center gap-0.5 text-primary">
+        <Play className="size-3 fill-primary" />
+        {plays}
+      </span>
+    </div>
+  );
+}
+
+function GameTile({ name, plays }: { name: string; plays: number }) {
+  return (
+    <div className="flex items-center justify-between gap-1 rounded-md border border-editor-border bg-editor px-2.5 py-2">
+      <p className="truncate text-[11px] font-medium">{name}</p>
+      <span className="flex shrink-0 items-center gap-0.5 font-mono text-[10px] text-primary">
+        <Play className="size-3 fill-primary" />
+        {plays}
+      </span>
     </div>
   );
 }
