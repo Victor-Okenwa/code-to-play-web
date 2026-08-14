@@ -1,6 +1,7 @@
 import { ExtensionFacts } from "@/components/home/extension-facts";
 import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
+import { SupportedIdes } from "@/components/home/supported-ides";
 import { WhyUse } from "@/components/home/why-use";
 import { Separator } from "@/components/ui/separator";
 
@@ -9,6 +10,7 @@ export default function Home() {
     <div className="flex flex-1 flex-col bg-background font-sans">
       <Hero />
       <ExtensionFacts />
+      <SupportedIdes />
 
       <WhyUse />
 
