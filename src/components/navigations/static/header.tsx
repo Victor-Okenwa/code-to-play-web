@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Logo } from "@/components/logo";
 import { DownloadIcon } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 type WithClassName = {
   className?: ClassValue;
@@ -65,7 +66,7 @@ function HeaderLinks({
         className={cn(
           "transition-colors hover:text-foreground",
           mobile ? "font-heading text-2xl" : "text-sm",
-          isActive ? "font-medium text-foreground" : "text-muted-foreground",
+          isActive ? "font-medium text-foreground font-display text-xs" : "text-muted-foreground",
         )}
       >
         {item.label}
@@ -167,7 +168,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
           onClick={closeMenu}
         >
           <Logo />
-          <span className="font-accent text-sm sm:text-base tracking-wide uppercase">
+          <span className="font-accent text-xs sm:text-sm lg:text-base tracking-wide uppercase">
             Code to Play
           </span>
         </Link>
@@ -176,6 +177,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
 
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2 md:flex">
+            <ThemeToggle />
             <Button
               variant="secondary"
               nativeButton={false}
@@ -218,7 +220,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            className="fixed inset-0 z-40 bg-background"
+            className="fixed w-full z-40 bg-background"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{
@@ -228,6 +230,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
             transition={{ duration: 0.32, ease: "easeOut" }}
             onClick={closeMenu}
           >
+            <ThemeToggle className="absolute top-4 right-4" />
             <motion.div
               className="flex h-full flex-col justify-center gap-8 px-6 pt-14"
               variants={listVariants}
@@ -255,9 +258,11 @@ export function StaticHeader({ className }: StaticHeaderProps) {
                   <Button
                     variant="default"
                     nativeButton={false}
-                    render={<Link href="/documentation?installation" />}
+                    render={<Link href="/documentation?tab=installation" />}
+
                     onClick={closeMenu}
                   >
+                    <DownloadIcon className="size-4" />
                     Install
                   </Button>
                 </motion.div>
