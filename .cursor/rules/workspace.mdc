@@ -1,0 +1,46 @@
+---
+description: Next.js workspace stack, conventions, and Better Auth setup
+alwaysApply: true
+---
+
+# Workspace
+
+Next.js App Router app in `src/`. This is **not** the Next.js from training data — read `node_modules/next/dist/docs/` before writing framework code, and follow deprecation notices.
+
+## Stack
+
+- Next.js 16 (App Router), React 19, TypeScript (strict)
+- Package manager: **bun**
+- Lint/format: **Biome** (`bun run lint`, `bun run format`) — do not add ESLint/Prettier
+- UI: Tailwind 4, shadcn (`base-nova`), `@base-ui/react`, `lucide-react`
+- Auth: **Better Auth** ([Next.js integration](https://better-auth.com/docs/integrations/next))
+- Dev server: `bun run dev` on port **4555**
+- Import alias: `@/*` → `./src/*`
+
+## Conventions
+
+- App Router only. Do not add `pages/`.
+- Prefer Server Components. Add `"use client"` only for browser state, events, or Better Auth React client hooks.
+- Colocate UI in `src/components`, primitives in `src/components/ui`, helpers in `src/lib`.
+- Use existing shadcn primitives (`Button`, `Input`, etc.) instead of one-off styled elements.
+
+## Better Auth
+
+Use Better Auth for all authentication. Do not add NextAuth, Clerk, or custom session cookies.
+
+When implementing auth, follow this layout:
+
+- Server instance: `src/lib/auth.ts` (`betterAuth`, `nextCookies()` last in `plugins`)
+- React client: `src/lib/auth-client.ts` (`createAuthClient` from `better-auth/react`)
+- Route handler: `src/app/api/auth/[...all]/route.ts` with `toNextJsHandler(auth)`
+- Route protection: `proxy.ts` (Next.js 16; not `middleware.ts`)
+
+```ts
+import { auth } from "@/lib/auth";
+import { toNextJsHandler } from "better-auth/next-js";
+
+export const { GET, POST } = toNextJsHandler(auth);
+```
+
+- Cookie checks in `proxy.ts` are optimistic only. Always validate with `auth.api.getSession({ headers: await headers() })` in Server Components, Server Actions, and route handlers.
+- Client sign-in/up/out goes through `authClient`. Server mutations that set cookies must run where `nextCookies()` can apply.

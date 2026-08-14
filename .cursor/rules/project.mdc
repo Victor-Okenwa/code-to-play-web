@@ -1,0 +1,28 @@
+---
+description: Product context for Code to Play and this companion web app
+alwaysApply: true
+---
+
+# Code to Play
+
+This repo (`code-to-play-web`) is the web app for **Code to Play**, a VS Code extension that unlocks mini-games as you write code.
+
+- VS Code Marketplace: [morse-code.code-to-play](https://marketplace.visualstudio.com/items?itemName=morse-code.code-to-play)
+- VS Code forks (Cursor, etc.): [Open VSX](https://open-vsx.org/extension/morse-code/code-to)
+- Extension source: [github.com/Victor-Okenwa/code-to-play](https://github.com/Victor-Okenwa/code-to-play)
+
+Treat the web app as a companion to the extension, not a generic Next.js starter. Copy, UX, and features should match the product: earn playtime by writing real code, then take a break in-editor.
+
+## How the extension works
+
+- Meaningful lines of code are counted (not comments, blanks, or brace-only lines).
+- Default unlock: **1000 lines = 5 plays**, shared across all games.
+- Games today: **Debug Snake**, **Whack-a-Bug**.
+- Status bar shows progress (`450/1000 lines` locked, or remaining plays when unlocked).
+- High scores, stats, and play counts live locally in the editor (privacy-first, no telemetry).
+
+## Product constraints
+
+- Do not invent telemetry, cloud sync, or social features unless the task explicitly adds them.
+- Keep the coding-reward loop obvious: write code → unlock plays → play → write more.
+- Language in the UI should stay developer-facing and match the extension (plays, lines, high scores), not generic “gaming platform” wording.

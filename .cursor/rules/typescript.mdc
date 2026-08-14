@@ -1,0 +1,68 @@
+---
+description: TypeScript typing — no any; infer first; unknown or never as last resort
+globs: **/*.{ts,tsx}
+alwaysApply: false
+---
+
+# TypeScript
+
+`any` is forbidden. Prefer inference. Use `unknown` for untrusted values and `never` for impossible states.
+
+## Infer first
+
+Let TypeScript infer locals, return types, and generics. Add annotations only when inference is wrong, the public API needs an explicit contract, or a value crosses a boundary (props, exports, schema results).
+
+```ts
+// ❌ BAD
+function parseCount(value: any): any {
+  return Number(value);
+}
+
+// ✅ GOOD — infer the implementation; annotate the contract
+function parseCount(value: string): number {
+  return Number(value);
+}
+
+const plays = [1, 2, 3]; // inferred number[]
+```
+
+## `unknown` for untrusted input
+
+Use `unknown` (then narrow) for JSON, `catch` clauses, and external data. Do not cast straight to a domain type.
+
+```ts
+// ❌ BAD
+catch (e: any) {
+  console.error(e.message);
+}
+
+// ✅ GOOD
+catch (error: unknown) {
+  const message = error instanceof Error ? error.message : "Unknown error";
+  console.error(message);
+}
+```
+
+```ts
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+```
+
+## `never` for exhaustiveness
+
+Use `never` when a value must not exist (exhaustive switches, unreachable branches). Do not use it as a stand-in for “I have not typed this yet.”
+
+```ts
+function assertNever(value: never): never {
+  throw new Error(`Unexpected value: ${String(value)}`);
+}
+```
+
+## Also avoid
+
+- `as any`, `as unknown as T`, and `@ts-ignore` / `@ts-expect-error` to silence real type errors
+- `Function`, `object`, or `{}` as grab-bag types — use a specific signature, `Record<string, unknown>`, or a named type
+- Widening annotations that erase inference (`const n: number = 1` when `1` is enough)
+
+When a library type is missing, wrap it in a narrow adapter that returns `unknown` and validates, rather than leaking `any`.
