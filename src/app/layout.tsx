@@ -1,17 +1,51 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist_Mono,
+  Pixelify_Sans,
+  Play,
+  Press_Start_2P,
+  VT323,
+} from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playSans = Play({
+  variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const pressStart2P = Press_Start_2P({
+  variable: "--font-press-start-2p",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const pixelifySans = Pixelify_Sans({
+  variable: "--font-pixelify-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const vt323 = VT323({
+  variable: "--font-vt323",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const fontVariables = [
+  playSans.variable,
+  geistMono.variable,
+  pressStart2P.variable,
+  pixelifySans.variable,
+  vt323.variable,
+].join(" ");
 
 export const metadata: Metadata = {
   title: "Code to play",
@@ -22,12 +56,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${fontVariables} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <TooltipProvider>
-          {children}
-        </TooltipProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
