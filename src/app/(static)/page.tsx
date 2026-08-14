@@ -4,10 +4,7 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col bg-background font-sans">
       <main className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-6 py-10 sm:px-10">
-        <div className="flex items-start justify-between gap-4">
-          <p className="font-display text-lg tracking-wide uppercase sm:text-xl">
-            Code to play
-          </p>
+        <div className="flex items-start justify-end">
           <ThemeToggle />
         </div>
 
