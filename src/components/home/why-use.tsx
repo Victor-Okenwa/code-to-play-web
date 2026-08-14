@@ -42,7 +42,7 @@ const BENEFITS = [
   },
   {
     icon: AppWindow,
-    title: "Play without leaving VS Code",
+    title: "Play without leaving your IDE",
     body: "Games open as a webview. Your tabs stay put, your context stays intact, and you return to the same cursor.",
   },
 ] as const;
