@@ -3,7 +3,6 @@
 import type { ClassValue } from "clsx";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,6 +10,8 @@ import { useEffect, useState } from "react";
 import { STATIC_NAV_LINKS } from "@/components/navigations/shared/links";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Logo } from "@/components/logo";
+import { DownloadIcon } from "lucide-react";
 
 type WithClassName = {
   className?: ClassValue;
@@ -165,14 +166,8 @@ export function StaticHeader({ className }: StaticHeaderProps) {
           className="flex items-center gap-2 text-foreground"
           onClick={closeMenu}
         >
-          <Image
-            src="/extension-icon.png"
-            alt="Code to Play"
-            width={28}
-            height={28}
-            priority
-          />
-          <span className="font-display text-sm tracking-wide uppercase sm:text-base">
+          <Logo />
+          <span className="font-accent text-sm sm:text-base tracking-wide uppercase">
             Code to Play
           </span>
         </Link>
@@ -195,6 +190,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
               render={<Link href="/documentation?installation" />}
               onClick={closeMenu}
             >
+              <DownloadIcon className="size-4" />
               Install
             </Button>
           </div>
