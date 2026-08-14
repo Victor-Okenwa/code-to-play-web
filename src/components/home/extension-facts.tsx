@@ -1,3 +1,4 @@
+"use client";
 import { CodeXml, Gamepad2, ShieldCheck, Tag } from "lucide-react";
 
 import { GITHUB_URL, MARKETPLACE_URL, OPEN_VSX_URL } from "@/lib/extension";
@@ -75,3 +76,5 @@ export function ExtensionFacts() {
     </section>
   );
 }
+
+
