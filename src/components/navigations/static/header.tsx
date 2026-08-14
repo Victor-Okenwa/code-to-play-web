@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { STATIC_NAV_LINKS } from "@/components/navigations/shared/links";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/logo";
+import { Logo } from "@/components/assets/logo";
 import { DownloadIcon } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 
