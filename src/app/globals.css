@@ -45,6 +45,12 @@
   --color-editor-panel: var(--editor-panel);
   --color-editor-border: var(--editor-border);
   --color-editor-foreground: var(--editor-foreground);
+  --color-editor-token-kw: var(--editor-token-kw);
+  --color-editor-token-fn: var(--editor-token-fn);
+  --color-editor-token-str: var(--editor-token-str);
+  --color-editor-token-num: var(--editor-token-num);
+  --color-editor-token-cm: var(--editor-token-cm);
+  --color-editor-token-ty: var(--editor-token-ty);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -87,10 +93,16 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --editor: oklch(0.22 0.02 264);
-  --editor-panel: oklch(0.18 0.015 264);
-  --editor-border: oklch(0.32 0.02 264);
-  --editor-foreground: oklch(0.93 0.01 264);
+  --editor: oklch(0.99 0 0);
+  --editor-panel: oklch(0.95 0.005 264);
+  --editor-border: oklch(0.88 0.01 264);
+  --editor-foreground: oklch(0.22 0.02 264);
+  --editor-token-kw: oklch(0.45 0.18 300);
+  --editor-token-fn: oklch(0.5 0.12 80);
+  --editor-token-str: oklch(0.45 0.12 145);
+  --editor-token-num: oklch(0.42 0.1 150);
+  --editor-token-cm: oklch(0.55 0.02 150);
+  --editor-token-ty: oklch(0.45 0.1 210);
 }
 
 .dark {
@@ -129,6 +141,12 @@
   --editor-panel: oklch(0.18 0.015 264);
   --editor-border: oklch(0.32 0.02 264);
   --editor-foreground: oklch(0.93 0.01 264);
+  --editor-token-kw: oklch(0.75 0.11 300);
+  --editor-token-fn: oklch(0.82 0.11 90);
+  --editor-token-str: oklch(0.78 0.11 140);
+  --editor-token-num: oklch(0.8 0.1 150);
+  --editor-token-cm: oklch(0.62 0.02 150);
+  --editor-token-ty: oklch(0.78 0.09 210);
 }
 
 @layer base {

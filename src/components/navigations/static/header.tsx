@@ -189,7 +189,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
             <Button
               variant="default"
               nativeButton={false}
-              render={<Link href="/documentation?installation" />}
+              render={<Link href="/documentation?tab=installation" />}
               onClick={closeMenu}
             >
               <DownloadIcon className="size-4" />
@@ -220,7 +220,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            className="fixed w-full z-40 bg-background"
+            className="fixed w-full h-[90lvh] z-40 bg-background"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{
