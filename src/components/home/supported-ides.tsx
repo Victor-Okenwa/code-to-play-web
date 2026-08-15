@@ -139,7 +139,7 @@ export function SupportedIdes() {
     >
       <div className="mx-auto flex max-w-6xl flex-col gap-5">
         <p className="text-center text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          Works in your editor
+          Works in your favorite editor
         </p>
         <div className="flex flex-col gap-4">
           <MarqueeRow items={SUPPORTED_IDES} direction="ltr" paused={paused} />

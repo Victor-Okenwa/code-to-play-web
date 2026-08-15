@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer";
 import { StaticHeader } from "@/components/navigations/static/header";
 
 export default function StaticLayout({ children }: LayoutProps<"/">) {
@@ -5,6 +6,7 @@ export default function StaticLayout({ children }: LayoutProps<"/">) {
     <>
       <StaticHeader />
       {children}
+      <Footer />
     </>
   );
 }
