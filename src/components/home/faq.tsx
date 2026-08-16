@@ -1,14 +1,18 @@
 "use client";
 
+import { ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 
-import { PricingCards } from "@/components/pricing/pricing-cards";
+import { FaqAccordion } from "@/components/faq/faq-accordion";
+import { buttonVariants } from "@/components/ui/button";
+import { HOME_FAQS } from "@/lib/faq";
 import { copyReveal, copyRevealStagger } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 
-export function Pricing() {
+export function Faq() {
   return (
-    <section id="pricing" className="scroll-mt-20 px-4 py-12 sm:px-6 sm:py-14">
+    <section className="px-4 py-12 sm:px-6 sm:py-14">
       <div className="mx-auto flex max-w-6xl flex-col gap-10">
         <motion.hgroup
           className="flex flex-col items-center gap-3 text-center"
@@ -21,35 +25,34 @@ export function Pricing() {
             className="text-xs font-semibold tracking-wide text-primary uppercase"
             variants={copyReveal}
           >
-            Pricing
+            FAQ
           </motion.p>
           <motion.h2
             className="font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
             variants={copyReveal}
           >
-            Earn plays, or add more when you need them
+            Questions before you install
           </motion.h2>
           <motion.p
             className="max-w-2xl text-lg text-muted-foreground"
             variants={copyReveal}
           >
-            The loop stays free: write code, unlock plays, take a break. Pro and
-            play spaces are optional when you want extra.
+            What it is, why it helps, and what Pro adds — then write code until
+            the status bar unlocks plays.
           </motion.p>
         </motion.hgroup>
 
-        <PricingCards />
+        <FaqAccordion items={HOME_FAQS} defaultOpenId={HOME_FAQS[0].id} />
 
-        <p className="text-center text-sm text-muted-foreground">
-          Full details on the{" "}
+        <div className="flex justify-center">
           <Link
-            href="/pricing"
-            className="font-medium text-foreground underline-offset-4 hover:underline"
+            href="/documentation?tab=faq"
+            className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
           >
-            pricing page
+            Read the full FAQ
+            <ArrowRight />
           </Link>
-          .
-        </p>
+        </div>
       </div>
     </section>
   );

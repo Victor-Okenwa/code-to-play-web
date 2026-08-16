@@ -1,6 +1,8 @@
 import { ExtensionFacts } from "@/components/home/extension-facts";
+import { Faq } from "@/components/home/faq";
 import { Features } from "@/components/home/features";
 import { Hero } from "@/components/home/hero";
+import { NextSteps } from "@/components/home/next-steps";
 import { Pricing } from "@/components/home/pricing";
 import { SupportedIdes } from "@/components/home/supported-ides";
 import { WhyUse } from "@/components/home/why-use";
@@ -19,6 +21,8 @@ export default function Home() {
 
       <Features />
       <Pricing />
+      <Faq />
+      <NextSteps />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { FaqAccordion } from "@/components/faq/faq-accordion";
 import {
   Accordion,
   AccordionContent,
@@ -16,6 +17,7 @@ import {
   UNLOCK_LINES,
   UNLOCK_PLAYS,
 } from "@/lib/extension";
+import { DOCS_FAQS } from "@/lib/faq";
 
 export function DocumentationTabs({ defaultTab }: { defaultTab: DocTab }) {
   const router = useRouter();
@@ -30,10 +32,11 @@ export function DocumentationTabs({ defaultTab }: { defaultTab: DocTab }) {
       }}
       className="gap-6"
     >
-      <TabsList variant="line" className="w-full justify-start">
+      <TabsList variant="line" className="w-full justify-start overflow-x-auto">
         <TabsTrigger value="installation">Install</TabsTrigger>
         <TabsTrigger value="usage">Play</TabsTrigger>
         <TabsTrigger value="tracking">Tracking</TabsTrigger>
+        <TabsTrigger value="faq">FAQ</TabsTrigger>
       </TabsList>
 
       <TabsContent value="installation" className="space-y-6">
@@ -140,6 +143,13 @@ export function DocumentationTabs({ defaultTab }: { defaultTab: DocTab }) {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
+      </TabsContent>
+
+      <TabsContent value="faq" className="space-y-6">
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          How the extension works, what Pro adds, and where your stats live.
+        </p>
+        <FaqAccordion items={DOCS_FAQS} defaultOpenId={DOCS_FAQS[0].id} />
       </TabsContent>
     </Tabs>
   );

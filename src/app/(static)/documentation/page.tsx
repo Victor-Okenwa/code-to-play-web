@@ -6,7 +6,7 @@ import { type DocTab, isDocTab } from "@/lib/extension";
 export const metadata: Metadata = {
   title: "Documentation — Code to Play",
   description:
-    "Install Code to Play, watch the status bar, and unlock plays by writing meaningful lines of code.",
+    "Install Code to Play, unlock plays by writing meaningful lines, and find answers in the FAQ.",
 };
 
 function resolveTab(
@@ -29,13 +29,14 @@ export default async function DocumentationPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const params = await searchParams;
+  const tab = resolveTab(params);
 
   return (
     <PageShell
       title="Documentation"
-      description="Install the extension, then write code until the status bar unlocks plays for in-editor games."
+      description="Install the extension, write code until the status bar unlocks plays, or jump to the FAQ."
     >
-      <DocumentationTabs defaultTab={resolveTab(params)} />
+      <DocumentationTabs key={tab} defaultTab={tab} />
     </PageShell>
   );
 }
