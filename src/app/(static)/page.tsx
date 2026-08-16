@@ -7,12 +7,19 @@ import { Pricing } from "@/components/home/pricing";
 import { SupportedIdes } from "@/components/home/supported-ides";
 import { WhyUse } from "@/components/home/why-use";
 import { Separator } from "@/components/ui/separator";
+import { getExtensionStats } from "@/lib/extension-stats";
+import { TRACKED_LANGUAGE_COUNT } from "@/lib/features";
 
-export default function Home() {
+export default async function Home() {
+  const stats = await getExtensionStats();
+
   return (
     <div className="flex flex-1 flex-col bg-background font-sans">
-      <Hero />
-      <ExtensionFacts />
+      <Hero installs={stats.installs} languages={TRACKED_LANGUAGE_COUNT} />
+      <ExtensionFacts
+        version={stats.version}
+        vscodeEngine={stats.vscodeEngine}
+      />
       <SupportedIdes />
 
       <WhyUse />

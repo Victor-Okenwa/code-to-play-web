@@ -1,54 +1,45 @@
 import type { Metadata } from "next";
+
+import { ReleaseList } from "@/components/changelog/release-list";
 import { PageShell } from "@/components/static/page-shell";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { UNLOCK_LINES, UNLOCK_PLAYS } from "@/lib/extension";
+import { getChangelogReleases } from "@/lib/changelog";
+import { CHANGELOG_URL, OPEN_VSX_URL } from "@/lib/extension";
 
 export const metadata: Metadata = {
   title: "Changelog — Code to Play",
-  description: "Release notes for the Code to Play VS Code extension.",
+  description:
+    "Release notes for the Code to Play VS Code extension, from Open VSX.",
 };
 
-const RELEASES = [
-  {
-    version: "1.0.0",
-    date: "2026",
-    items: [
-      `Unlock ${UNLOCK_PLAYS} plays per ${UNLOCK_LINES} meaningful lines, shared across games.`,
-      "In-editor games.",
-      "Status bar progress while locked, remaining plays when unlocked.",
-      "High scores and stats stored locally — no telemetry.",
-    ],
-  },
-] as const;
+export default async function ChangelogPage() {
+  const releases = await getChangelogReleases();
 
-export default function ChangelogPage() {
   return (
     <PageShell
       title="Changelog"
       description="What shipped in the extension. Plays, line counting, and games stay in-editor."
     >
-      <div className="space-y-4">
-        {RELEASES.map((release) => (
-          <Card key={release.version}>
-            <CardHeader>
-              <CardTitle className="font-mono text-lg">
-                v{release.version}
-              </CardTitle>
-              <CardDescription>{release.date}</CardDescription>
-              <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed">
-                {release.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </CardHeader>
-          </Card>
-        ))}
-      </div>
+      <ReleaseList releases={releases} />
+      <p className="text-sm text-muted-foreground">
+        Source:{" "}
+        <a
+          href={OPEN_VSX_URL}
+          className="underline underline-offset-3 hover:text-foreground"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Open VSX
+        </a>
+        {" · "}
+        <a
+          href={CHANGELOG_URL}
+          className="underline underline-offset-3 hover:text-foreground"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          CHANGELOG.md
+        </a>
+      </p>
     </PageShell>
   );
 }

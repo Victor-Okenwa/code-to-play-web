@@ -113,6 +113,11 @@ export const TRACKED_EXTENSION_GROUPS = [
   },
 ] as const;
 
+export const TRACKED_LANGUAGE_COUNT =
+  TRACKED_EXTENSION_GROUPS.find(
+    (group) => group.category === "Programming languages",
+  )?.items.filter((item) => item.name !== "Others").length ?? 30;
+
 export const FEATURES = [
   {
     id: "meaningful-lines",

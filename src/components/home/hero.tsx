@@ -7,16 +7,9 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { EditorMock } from "@/components/assets/editor-mock";
 import { buttonVariants } from "@/components/ui/button";
+import { OPEN_VSX_URL } from "@/lib/extension";
 import { copyReveal, copyRevealStagger } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-
-const OPEN_VSX_INSTALL_URL =
-  "https://open-vsx.org/extension/morse-code/code-to";
-
-const STATS = {
-  installs: 1500,
-  languages: 30,
-} as const;
 
 type AnimatedCounterProps = {
   to: number;
@@ -75,7 +68,13 @@ function AnimatedCounter({
   );
 }
 
-export function Hero() {
+export function Hero({
+  installs,
+  languages,
+}: {
+  installs: number;
+  languages: number;
+}) {
   return (
     <article className="overflow-x-clip bg-linear-to-b from-primary/10 to-background">
       <div className="flex flex-col gap-10 py-12 lg:flex-row lg:items-center lg:gap-10 lg:py-20">
@@ -114,9 +113,8 @@ export function Hero() {
               Install Extension
             </Link>
             <Link
-              href={OPEN_VSX_INSTALL_URL}
+              href="/pricing"
               target="_blank"
-              rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
                 "h-13 px-8 max-sm:grow font-bold",
@@ -130,7 +128,7 @@ export function Hero() {
           <section className="flex flex-wrap gap-6 sm:gap-10">
             <div className="space-y-1">
               <p className="font-mono text-2xl font-medium tracking-tight sm:text-3xl">
-                <AnimatedCounter to={STATS.installs} shorten suffix="+" />
+                <AnimatedCounter to={installs} shorten suffix="+" />
               </p>
               <p className="text-xs tracking-wide text-muted-foreground uppercase">
                 Installs
@@ -138,7 +136,7 @@ export function Hero() {
             </div>
             <div className="space-y-1">
               <p className="font-mono text-2xl font-medium tracking-tight sm:text-3xl">
-                <AnimatedCounter to={STATS.languages} suffix="+" />
+                <AnimatedCounter to={languages} suffix="+" />
               </p>
               <p className="text-xs tracking-wide text-muted-foreground uppercase">
                 Languages
