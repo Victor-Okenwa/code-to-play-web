@@ -7,6 +7,7 @@ import {
   VT323,
 } from "next/font/google";
 import "./globals.css";
+import { SplashLoader } from "@/components/splash-loader";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -66,6 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem={false}
           disableTransitionOnChange
         >
+          <SplashLoader />
           <TooltipProvider>{children}</TooltipProvider>
         </ThemeProvider>
       </body>
