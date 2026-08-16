@@ -66,7 +66,7 @@ function HeaderLinks({
         className={cn(
           "transition-colors hover:text-foreground",
           mobile ? "font-heading text-2xl" : "text-sm",
-          isActive ? "font-medium text-foreground font-display text-xs" : "text-muted-foreground",
+          isActive ? "font-medium text-foreground" : "text-muted-foreground",
         )}
       >
         {item.label}
