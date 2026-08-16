@@ -104,7 +104,7 @@ export function Hero() {
 
           <section className="flex flex-wrap items-center gap-3">
             <Link
-              href="/documentation?tab=installation"
+              href="/docs?tab=installation"
               className={cn(
                 buttonVariants({ variant: "default", size: "lg" }),
                 "h-13 px-8 max-sm:grow font-bold",

@@ -22,7 +22,7 @@ export default function SignInPage() {
       </p>
       <div>
         <Link
-          href="/documentation?tab=installation"
+          href="/docs?tab=installation"
           className={cn(buttonVariants({ variant: "default", size: "lg" }))}
         >
           Install Extension

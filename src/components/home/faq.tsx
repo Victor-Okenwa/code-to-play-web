@@ -46,7 +46,7 @@ export function Faq() {
 
         <div className="flex justify-center">
           <Link
-            href="/documentation?tab=faq"
+            href="/docs?tab=faq"
             className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
           >
             Read the full FAQ

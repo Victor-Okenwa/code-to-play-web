@@ -15,11 +15,3 @@ export const X_URL = `https://x.com/${X_HANDLE}`;
 
 export const UNLOCK_LINES = 1000;
 export const UNLOCK_PLAYS = 5;
-
-const DOC_TABS = ["installation", "usage", "tracking", "faq"] as const;
-
-export type DocTab = (typeof DOC_TABS)[number];
-
-export function isDocTab(value: string | undefined): value is DocTab {
-  return DOC_TABS.includes(value as DocTab);
-}

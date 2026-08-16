@@ -14,7 +14,7 @@ const PROJECT_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Pr
 
 const ACTIONS = [
   {
-    href: "/documentation?tab=installation",
+    href: "/docs?tab=installation",
     label: "Install",
     description:
       "Add Code to Play to VS Code or Cursor and start earning plays.",

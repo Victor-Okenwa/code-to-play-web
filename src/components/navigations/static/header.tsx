@@ -1,18 +1,16 @@
 "use client";
 
 import type { ClassValue } from "clsx";
-import { Menu, X } from "lucide-react";
+import { DownloadIcon, Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-
+import { Logo } from "@/components/assets/logo";
 import { STATIC_NAV_LINKS } from "@/components/navigations/shared/links";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/assets/logo";
-import { DownloadIcon } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 type WithClassName = {
   className?: ClassValue;
@@ -189,7 +187,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
             <Button
               variant="default"
               nativeButton={false}
-              render={<Link href="/documentation?tab=installation" />}
+              render={<Link href="/docs?tab=installation" />}
               onClick={closeMenu}
             >
               <DownloadIcon className="size-4" />
@@ -258,8 +256,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
                   <Button
                     variant="default"
                     nativeButton={false}
-                    render={<Link href="/documentation?tab=installation" />}
-
+                    render={<Link href="/docs?tab=installation" />}
                     onClick={closeMenu}
                   >
                     <DownloadIcon className="size-4" />

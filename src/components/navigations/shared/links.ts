@@ -3,5 +3,5 @@ export const STATIC_NAV_LINKS = [
   { href: "/features", label: "Features" },
   { href: "/pricing", label: "Pricing" },
   { href: "/changelog", label: "Changelog" },
-  { href: "/documentation", label: "Documentation" },
+  { href: "/docs", label: "Documentation" },
 ] as const;
