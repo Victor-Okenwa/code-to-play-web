@@ -1,12 +1,18 @@
-import { Footer } from "@/components/footer";
-import { StaticHeader } from "@/components/navigations/static/header";
+import { AppSidebar } from "@/components/navigations/dashboard/app-sidebar";
+import { DashboardHeader } from "@/components/navigations/dashboard/header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { requireSession } from "@/lib/session";
 
-export default function DashboardLayout({ children }: LayoutProps<"/">) {
+export default async function DashboardLayout({ children }: LayoutProps<"/">) {
+  await requireSession();
+
   return (
-    <>
-      <StaticHeader />
-      {children}
-      <Footer />
-    </>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <DashboardHeader />
+        {children}
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
