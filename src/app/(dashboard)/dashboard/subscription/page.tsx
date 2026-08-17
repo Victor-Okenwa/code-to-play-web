@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DashboardPageShell } from "@/components/dashboard/page-shell";
+import { PlaySpacesCard } from "@/components/pricing/pricing-cards";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,22 +13,23 @@ import {
 import {
   FREE_FEATURES,
   formatUsd,
+  PLAY_SPACE_COOLDOWN_HOURS,
   PRO_FEATURES,
   PRO_MONTHLY,
 } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Subscription — Code to Play",
-  description: "Free and Pro plans for Code to Play.",
+  description: "Free and Pro plans for Code to Play, plus play space add-ons.",
 };
 
 export default function DashboardSubscriptionPage() {
   return (
     <DashboardPageShell
       title="Subscription"
-      description="You are on Free. Pro adds play spaces, Call Stack, and Merge Conflict — checkout is not wired yet."
+      description={`You are on Free. Pro adds extra play spaces, Call Stack, and Merge Conflict. You can also buy play spaces one-off, with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys — checkout is not wired yet.`}
     >
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader>
             <CardTitle>Free</CardTitle>
@@ -57,6 +59,7 @@ export default function DashboardSubscriptionPage() {
             </Button>
           </CardContent>
         </Card>
+        <PlaySpacesCard />
       </div>
     </DashboardPageShell>
   );

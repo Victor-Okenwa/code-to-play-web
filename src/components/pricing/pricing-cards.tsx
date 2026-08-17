@@ -70,13 +70,83 @@ function Price({
   );
 }
 
-export function PricingCards() {
-  const [interval, setInterval] = useState<BillingInterval>("monthly");
+export function PlaySpacesCard() {
   const [quantity, setQuantity] = useState(PLAY_SPACE_MIN);
-
-  const yearly = interval === "yearly";
   const playTotal = quantity * PLAY_SPACE_PRICE;
   const playWasTotal = quantity * PLAY_SPACE_WAS;
+
+  return (
+    <Card className="flex h-full flex-col">
+      <CardHeader>
+        <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          Add-on
+        </p>
+        <CardTitle className="font-heading text-xl">Play spaces</CardTitle>
+        <CardDescription>
+          Buy extra play spaces when you have already earned your loop and still
+          want a short break.
+        </CardDescription>
+        <div className="space-y-3 pt-2">
+          <Price
+            current={formatUsd(playTotal)}
+            was={formatUsd(playWasTotal)}
+            suffix={quantity === 1 ? "for 1 space" : `for ${quantity} spaces`}
+          />
+          <p className="text-xs text-muted-foreground">
+            {formatUsd(PLAY_SPACE_PRICE)} each{" "}
+            <span className="line-through">{formatUsd(PLAY_SPACE_WAS)}</span>
+          </p>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="icon-sm"
+              aria-label="Fewer play spaces"
+              disabled={quantity <= PLAY_SPACE_MIN}
+              onClick={() =>
+                setQuantity((value) => Math.max(PLAY_SPACE_MIN, value - 1))
+              }
+            >
+              <Minus />
+            </Button>
+            <span className="min-w-8 text-center font-heading text-lg font-semibold tabular-nums">
+              {quantity}
+            </span>
+            <Button
+              type="button"
+              variant="outline"
+              size="icon-sm"
+              aria-label="More play spaces"
+              disabled={quantity >= PLAY_SPACE_MAX}
+              onClick={() =>
+                setQuantity((value) => Math.min(PLAY_SPACE_MAX, value + 1))
+              }
+            >
+              <Plus />
+            </Button>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="flex flex-1 flex-col gap-4">
+        <p className="text-sm text-muted-foreground">
+          Buy {PLAY_SPACE_MIN} to {PLAY_SPACE_MAX} play spaces at a time. After
+          a purchase, the next buy is locked for {PLAY_SPACE_COOLDOWN_HOURS}{" "}
+          hours so you stay concentrated on writing code.
+        </p>
+      </CardContent>
+      <CardFooter className="mt-auto">
+        <Button type="button" disabled className="w-full">
+          Coming soon
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+export function PricingCards() {
+  const [interval, setInterval] = useState<BillingInterval>("monthly");
+
+  const yearly = interval === "yearly";
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
@@ -170,71 +240,7 @@ export function PricingCards() {
         </CardFooter>
       </Card>
 
-      <Card className="flex h-full flex-col">
-        <CardHeader>
-          <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-            Add-on
-          </p>
-          <CardTitle className="font-heading text-xl">Play spaces</CardTitle>
-          <CardDescription>
-            Buy extra play spaces when you have already earned your loop and
-            still want a short break.
-          </CardDescription>
-          <div className="space-y-3 pt-2">
-            <Price
-              current={formatUsd(playTotal)}
-              was={formatUsd(playWasTotal)}
-              suffix={quantity === 1 ? "for 1 space" : `for ${quantity} spaces`}
-            />
-            <p className="text-xs text-muted-foreground">
-              {formatUsd(PLAY_SPACE_PRICE)} each{" "}
-              <span className="line-through">{formatUsd(PLAY_SPACE_WAS)}</span>
-            </p>
-            <div className="flex items-center gap-2">
-              <Button
-                type="button"
-                variant="outline"
-                size="icon-sm"
-                aria-label="Fewer play spaces"
-                disabled={quantity <= PLAY_SPACE_MIN}
-                onClick={() =>
-                  setQuantity((value) => Math.max(PLAY_SPACE_MIN, value - 1))
-                }
-              >
-                <Minus />
-              </Button>
-              <span className="min-w-8 text-center font-heading text-lg font-semibold tabular-nums">
-                {quantity}
-              </span>
-              <Button
-                type="button"
-                variant="outline"
-                size="icon-sm"
-                aria-label="More play spaces"
-                disabled={quantity >= PLAY_SPACE_MAX}
-                onClick={() =>
-                  setQuantity((value) => Math.min(PLAY_SPACE_MAX, value + 1))
-                }
-              >
-                <Plus />
-              </Button>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="flex flex-1 flex-col gap-4">
-          <p className="text-sm text-muted-foreground">
-            Buy {PLAY_SPACE_MIN} to {PLAY_SPACE_MAX} play spaces at a time.
-            After a purchase, the next buy is locked for{" "}
-            {PLAY_SPACE_COOLDOWN_HOURS} hours so you stay concentrated on
-            writing code.
-          </p>
-        </CardContent>
-        <CardFooter className="mt-auto">
-          <Button type="button" disabled className="w-full">
-            Coming soon
-          </Button>
-        </CardFooter>
-      </Card>
+      <PlaySpacesCard />
     </div>
   );
 }
