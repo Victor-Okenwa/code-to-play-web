@@ -1,33 +1,30 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { PageShell } from "@/components/static/page-shell";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import { SignInCard } from "@/components/auth/signin-card";
+import { auth } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Sign in — Code to Play",
   description:
-    "Code to Play keeps plays and high scores in your editor. You do not need an account to install or play.",
+    "Sign in with GitHub. Plays and high scores stay in your editor.",
 };
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (session) {
+    redirect("/dashboard");
+  }
+
   return (
-    <PageShell
-      title="Sign in"
-      description="The extension stores plays, high scores, and stats locally in your editor. You do not need an account to install or play."
-    >
-      <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">
-        Web accounts are not part of Code to Play yet. Install the extension and
-        start writing code — the status bar tracks lines until plays unlock.
-      </p>
-      <div>
-        <Link
-          href="/docs?tab=installation"
-          className={cn(buttonVariants({ variant: "default", size: "lg" }))}
-        >
-          Install Extension
-        </Link>
-      </div>
-    </PageShell>
+    <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center px-4 py-12 sm:px-6 lg:py-16">
+      <Suspense>
+        <SignInCard />
+      </Suspense>
+    </main>
   );
 }

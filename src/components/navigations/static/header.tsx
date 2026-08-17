@@ -7,7 +7,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/assets/logo";
+import { HeaderAuth } from "@/components/navigations/shared/header-auth";
 import { STATIC_NAV_LINKS } from "@/components/navigations/shared/links";
+import { Profile } from "@/components/navigations/shared/profile";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -176,14 +178,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2 md:flex">
             <ThemeToggle />
-            <Button
-              variant="secondary"
-              nativeButton={false}
-              render={<Link href="/signin" />}
-              onClick={closeMenu}
-            >
-              Sign in
-            </Button>
+            <HeaderAuth onNavigate={closeMenu} />
             <Button
               variant="default"
               nativeButton={false}
@@ -193,6 +188,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
               <DownloadIcon className="size-4" />
               Install
             </Button>
+            <Profile onNavigate={closeMenu} />
           </div>
 
           <Button
@@ -243,14 +239,7 @@ export function StaticHeader({ className }: StaticHeaderProps) {
                 variants={listVariants}
               >
                 <motion.div variants={itemVariants}>
-                  <Button
-                    variant="secondary"
-                    nativeButton={false}
-                    render={<Link href="/signin" />}
-                    onClick={closeMenu}
-                  >
-                    Sign in
-                  </Button>
+                  <HeaderAuth onNavigate={closeMenu} />
                 </motion.div>
                 <motion.div variants={itemVariants}>
                   <Button
@@ -262,6 +251,9 @@ export function StaticHeader({ className }: StaticHeaderProps) {
                     <DownloadIcon className="size-4" />
                     Install
                   </Button>
+                </motion.div>
+                <motion.div variants={itemVariants}>
+                  <Profile onNavigate={closeMenu} />
                 </motion.div>
               </motion.div>
             </motion.div>
