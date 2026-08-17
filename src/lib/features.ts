@@ -164,7 +164,7 @@ export const FEATURES = [
   {
     id: "free",
     title: "Free to install",
-    body: "Install from the VS Code Marketplace or Open VSX. Games, local high scores, and stats are included — no account, no subscription.",
+    body: "Install from the VS Code Marketplace or Open VSX. Games, local high scores, and stats are included — no account required to play, no subscription.",
     home: false,
   },
 ] as const;

@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { safeCallbackUrl } from "@/lib/auth-callback";
 import { authClient } from "@/lib/auth-client";
 
 export function SignInCard() {
@@ -20,6 +21,7 @@ export function SignInCard() {
   const searchParams = useSearchParams();
   const [pending, setPending] = useState(false);
   const errorToastShown = useRef(false);
+  const callbackURL = safeCallbackUrl(searchParams.get("callbackURL"));
 
   useEffect(() => {
     if (searchParams.get("error") !== "1" || errorToastShown.current) {
@@ -28,17 +30,27 @@ export function SignInCard() {
 
     errorToastShown.current = true;
     toast.error("GitHub sign-in did not complete. Try again.");
-    router.replace("/signin", { scroll: false });
-  }, [router, searchParams]);
+    const nextUrl =
+      callbackURL === "/dashboard"
+        ? "/signin"
+        : `/signin?callbackURL=${encodeURIComponent(callbackURL)}`;
+    router.replace(nextUrl, { scroll: false });
+  }, [callbackURL, router, searchParams]);
 
   async function signInWithGitHub() {
     setPending(true);
 
+    const errorCallbackURL =
+      callbackURL === "/dashboard"
+        ? "/signin?error=1"
+        : `/signin?error=1&callbackURL=${encodeURIComponent(callbackURL)}`;
+
     const { error } = await authClient.signIn.social({
       provider: "github",
-      callbackURL: "/dashboard",
-      newUserCallbackURL: "/dashboard?welcome=1",
-      errorCallbackURL: "/signin?error=1",
+      callbackURL,
+      newUserCallbackURL:
+        callbackURL === "/dashboard" ? "/dashboard?welcome=1" : callbackURL,
+      errorCallbackURL,
     });
 
     if (error) {
@@ -57,8 +69,8 @@ export function SignInCard() {
           Sign in to Code to Play
         </CardTitle>
         <CardDescription className="max-w-sm text-pretty">
-          Continue with GitHub. Plays and high scores still live in your editor
-          — this account is for the web app only.
+          Continue with GitHub. This account can also link your editor. Plays
+          and high scores still live on your machine.
         </CardDescription>
       </CardHeader>
       <CardContent>

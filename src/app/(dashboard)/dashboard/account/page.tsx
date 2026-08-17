@@ -22,7 +22,7 @@ export default async function DashboardAccountPage() {
   return (
     <DashboardPageShell
       title="Account"
-      description="Signed in with GitHub. This account is for the web app — plays still live in your editor."
+      description="Signed in with GitHub. This account also links the editor. Plays still live on your machine."
     >
       <Card className="max-w-xl">
         <CardHeader>
@@ -44,7 +44,8 @@ export default async function DashboardAccountPage() {
             </div>
           )}
           <p className="text-sm text-muted-foreground">
-            Connected through GitHub. Use the profile menu to sign out.
+            Connected through GitHub. Sign in from the Code to Play view in your
+            editor to link this account. Use the profile menu to sign out.
           </p>
         </CardContent>
       </Card>

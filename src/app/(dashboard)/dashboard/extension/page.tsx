@@ -21,7 +21,7 @@ export default function DashboardExtensionPage() {
   return (
     <DashboardPageShell
       title="Extension"
-      description="Install Code to Play where you write code. Plays, high scores, and stats stay in the editor — nothing is uploaded from here."
+      description="Install Code to Play where you write code. Sign in from the activity bar to link this account. Plays, high scores, and stats stay in the editor."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <Card>

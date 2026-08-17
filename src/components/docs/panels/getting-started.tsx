@@ -8,9 +8,9 @@ export function GettingStartedPanel() {
   return (
     <DocsProse>
       <p>
-        You do not need an account or a network connection to use Code to Play.
-        Install the extension, write code, and unlock plays locally in the
-        editor.
+        You do not need an account or a network connection to play. Install the
+        extension, write code, and unlock plays locally in the editor. Sign in
+        from the activity bar is optional and is how you will link Pro later.
       </p>
       <h2>What you need</h2>
       <ul>
