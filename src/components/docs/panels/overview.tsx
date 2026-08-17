@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DocsProse } from "@/components/docs/docs-prose";
 import { docsPath } from "@/lib/docs";
 import { UNLOCK_LINES, UNLOCK_PLAYS } from "@/lib/extension";
-import { FREE_GAMES } from "@/lib/pricing";
+import { FREE_GAMES, PRO_GAMES } from "@/lib/pricing";
 
 export function OverviewPanel() {
   return (
@@ -26,9 +26,10 @@ export function OverviewPanel() {
       </ol>
       <h2>Games</h2>
       <p>
-        Free includes {FREE_GAMES.join(" and ")}. Both have difficulty levels.
-        High scores, stats, and play counts stay on your machine — the extension
-        does not send telemetry.
+        Free includes {FREE_GAMES.join(" and ")}. Pro adds{" "}
+        {PRO_GAMES.join(" and ")}. All have difficulty levels. High scores,
+        stats, and play counts stay on your machine — the extension does not
+        send telemetry.
       </p>
       <h2>Where to go next</h2>
       <ul>

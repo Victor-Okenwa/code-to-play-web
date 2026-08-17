@@ -120,7 +120,8 @@ export function PricingCards() {
           </p>
           <CardTitle className="font-heading text-xl">Pro</CardTitle>
           <CardDescription>
-            Everything in Free, extra play spaces, and more games as they ship.
+            Everything in Free, extra play spaces, Call Stack, and Merge
+            Conflict.
           </CardDescription>
           <Tabs
             value={interval}

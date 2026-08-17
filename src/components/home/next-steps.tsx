@@ -26,7 +26,7 @@ const ACTIONS = [
     href: "#pricing",
     label: "Go Pro",
     description:
-      "Extra play spaces and more games when you want more than Free.",
+      "Extra play spaces, Call Stack, and Merge Conflict when you want more than Free.",
     icon: Sparkles,
     external: false,
     featured: false,

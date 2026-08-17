@@ -18,7 +18,7 @@ export default function PricingPage() {
   return (
     <PageShell
       title="Pricing"
-      description={`Install free and earn plays by writing code. Pro is ${formatUsd(PRO_MONTHLY)}/month for extra play spaces and upcoming games, or buy play spaces one-off — with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys.`}
+      description={`Install free and earn plays by writing code. Pro is ${formatUsd(PRO_MONTHLY)}/month for extra play spaces, Call Stack, and Merge Conflict, or buy play spaces one-off — with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys.`}
     >
       <PricingCards />
     </PageShell>

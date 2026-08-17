@@ -1,8 +1,8 @@
 "use client";
 
-import { LayoutDashboardIcon, LogOutIcon } from "lucide-react";
+import { HomeIcon, LayoutDashboardIcon, LogOutIcon } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   AlertDialog,
@@ -35,7 +35,9 @@ function initials(name: string) {
 
 export function Profile({ onNavigate }: { onNavigate?: () => void }) {
   const router = useRouter();
+  const pathname = usePathname();
   const { data: session } = authClient.useSession();
+  const onDashboard = pathname.startsWith("/dashboard");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
 
@@ -89,11 +91,11 @@ export function Profile({ onNavigate }: { onNavigate?: () => void }) {
           <DropdownMenuItem
             onClick={() => {
               onNavigate?.();
-              router.push("/dashboard");
+              router.push(onDashboard ? "/" : "/dashboard");
             }}
           >
-            <LayoutDashboardIcon />
-            Dashboard
+            {onDashboard ? <HomeIcon /> : <LayoutDashboardIcon />}
+            {onDashboard ? "Home" : "Dashboard"}
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem

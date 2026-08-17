@@ -5,7 +5,7 @@ import {
   TRACKED_LANGUAGES_PREVIEW,
   UNLOCK_PROGRESS_DEMO,
 } from "@/lib/features";
-import { FREE_GAMES } from "@/lib/pricing";
+import { FREE_GAMES, PRO_GAMES } from "@/lib/pricing";
 
 export function QuickStartPanel() {
   return (
@@ -37,7 +37,9 @@ export function QuickStartPanel() {
       <ol>
         <li>Open the Code to Play view in the Activity Bar.</li>
         <li>
-          Pick a game ({FREE_GAMES.join(" or ")}). Both have difficulty levels.
+          Pick a game ({FREE_GAMES.join(" or ")}, or Pro:{" "}
+          {PRO_GAMES.join(" / ")}
+          ). All have difficulty levels.
         </li>
         <li>
           Spend a play. Games open as a webview, so your files and cursor stay

@@ -14,9 +14,8 @@ export const PLAY_SPACE_MAX = 10;
 export const PLAY_SPACE_COOLDOWN_HOURS = 5;
 
 export const FREE_GAMES = ["Whack-a-Bug", "Debug Snake"] as const;
-
-// TODO: replace PRO_UPCOMING_GAMES with real game names when those games ship.
-export const PRO_UPCOMING_GAMES = "More games (names coming)";
+export const PRO_GAMES = ["Call Stack", "Merge Conflict"] as const;
+export const PRO_UPCOMING_GAMES = PRO_GAMES.join(" and ");
 
 export function formatUsd(amount: number): string {
   return new Intl.NumberFormat("en-US", {

@@ -25,7 +25,7 @@ export default function DashboardSubscriptionPage() {
   return (
     <DashboardPageShell
       title="Subscription"
-      description="You are on Free. Pro adds play spaces and upcoming games — checkout is not wired yet."
+      description="You are on Free. Pro adds play spaces, Call Stack, and Merge Conflict — checkout is not wired yet."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <Card>

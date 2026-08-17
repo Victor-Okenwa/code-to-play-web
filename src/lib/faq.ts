@@ -40,7 +40,7 @@ export const HOME_FAQS: readonly FaqItem[] = [
   {
     id: "pro",
     question: "What's included in Pro?",
-    answer: `Pro includes everything in Free, plus ${PRO_EXTRA_PLAY_SPACES} extra play spaces and ${PRO_UPCOMING_GAMES.toLowerCase()}. It’s ${formatUsd(PRO_MONTHLY)}/month (${formatUsd(PRO_MONTHLY_WAS)} marked down), or 15% off billed yearly at ${formatUsd(PRO_YEARLY)}. Play spaces are a separate one-time add-on at ${formatUsd(PLAY_SPACE_PRICE)} each (${PLAY_SPACE_MIN}–${PLAY_SPACE_MAX}), with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour cooldown after a purchase so focus stays on writing code. Checkout is not live yet.`,
+    answer: `Pro includes everything in Free, plus ${PRO_EXTRA_PLAY_SPACES} extra play spaces and ${PRO_UPCOMING_GAMES}. It’s ${formatUsd(PRO_MONTHLY)}/month (${formatUsd(PRO_MONTHLY_WAS)} marked down), or 15% off billed yearly at ${formatUsd(PRO_YEARLY)}. Play spaces are a separate one-time add-on at ${formatUsd(PLAY_SPACE_PRICE)} each (${PLAY_SPACE_MIN}–${PLAY_SPACE_MAX}), with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour cooldown after a purchase so focus stays on writing code. Checkout is not live yet.`,
   },
 ];
 

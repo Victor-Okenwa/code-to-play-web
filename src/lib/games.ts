@@ -1,4 +1,4 @@
-import { FREE_GAMES, PRO_UPCOMING_GAMES } from "@/lib/pricing";
+import { FREE_GAMES, PRO_GAMES } from "@/lib/pricing";
 
 export type GameTier = "free" | "pro";
 
@@ -15,16 +15,22 @@ const FREE_GAME_DESCRIPTIONS: Record<(typeof FREE_GAMES)[number], string> = {
     "Smash bugs as they pop up. Uses the same play pool as Debug Snake.",
 };
 
+const PRO_GAME_DESCRIPTIONS: Record<(typeof PRO_GAMES)[number], string> = {
+  "Call Stack":
+    "Drop call and return frames. Match a return onto its call to pop the stack.",
+  "Merge Conflict":
+    "Swap ours, theirs, and base hunks until matching lines merge. Don't let HEAD overflow.",
+};
+
 export const LISTED_GAMES: ListedGame[] = [
   ...FREE_GAMES.map((name) => ({
     name,
     tier: "free" as const,
     description: FREE_GAME_DESCRIPTIONS[name],
   })),
-  {
-    name: PRO_UPCOMING_GAMES,
-    tier: "pro",
-    description:
-      "Pro adds extra play spaces and upcoming titles. Names coming when they ship.",
-  },
+  ...PRO_GAMES.map((name) => ({
+    name,
+    tier: "pro" as const,
+    description: PRO_GAME_DESCRIPTIONS[name],
+  })),
 ];

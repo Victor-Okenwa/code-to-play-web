@@ -19,7 +19,7 @@ export default function DashboardGamesPage() {
   return (
     <DashboardPageShell
       title="Games"
-      description="Unlock plays in your editor, then take a break in Debug Snake or Whack-a-Bug. Pro adds extra play spaces and upcoming titles."
+      description="Unlock plays in your editor, then take a break in Debug Snake or Whack-a-Bug. Pro adds Call Stack, Merge Conflict, and extra play spaces."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {LISTED_GAMES.map((game) => (
