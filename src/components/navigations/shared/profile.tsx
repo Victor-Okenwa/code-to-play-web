@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOutIcon } from "lucide-react";
+import { LayoutDashboardIcon, LogOutIcon } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,6 +19,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth-client";
@@ -85,6 +86,16 @@ export function Profile({ onNavigate }: { onNavigate?: () => void }) {
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-auto min-w-40">
+          <DropdownMenuItem
+            onClick={() => {
+              onNavigate?.();
+              router.push("/dashboard");
+            }}
+          >
+            <LayoutDashboardIcon />
+            Dashboard
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem
             variant="destructive"
             onClick={() => setConfirmOpen(true)}
