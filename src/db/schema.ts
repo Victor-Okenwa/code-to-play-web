@@ -104,9 +104,51 @@ export const deviceCode = sqliteTable(
   (table) => [index("device_code_userId_idx").on(table.userId)],
 );
 
-export const userRelations = relations(user, ({ many }) => ({
+export const userAnalytics = sqliteTable("user_analytics", {
+  userId: text("user_id")
+    .primaryKey()
+    .references(() => user.id, { onDelete: "cascade" }),
+  optedIn: integer("opted_in", { mode: "boolean" }).default(false).notNull(),
+  optedInAt: integer("opted_in_at", { mode: "timestamp_ms" }),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+    .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
+export const userStats = sqliteTable("user_stats", {
+  userId: text("user_id")
+    .primaryKey()
+    .references(() => user.id, { onDelete: "cascade" }),
+  snapshot: text("snapshot").notNull(),
+  syncedAt: integer("synced_at", { mode: "timestamp_ms" }).notNull(),
+});
+
+export const userRelations = relations(user, ({ many, one }) => ({
   sessions: many(session),
   accounts: many(account),
+  analytics: one(userAnalytics, {
+    fields: [user.id],
+    references: [userAnalytics.userId],
+  }),
+  stats: one(userStats, {
+    fields: [user.id],
+    references: [userStats.userId],
+  }),
+}));
+
+export const userAnalyticsRelations = relations(userAnalytics, ({ one }) => ({
+  user: one(user, {
+    fields: [userAnalytics.userId],
+    references: [user.id],
+  }),
+}));
+
+export const userStatsRelations = relations(userStats, ({ one }) => ({
+  user: one(user, {
+    fields: [userStats.userId],
+    references: [user.id],
+  }),
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({

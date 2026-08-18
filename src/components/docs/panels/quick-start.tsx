@@ -68,9 +68,9 @@ export function QuickStartPanel() {
       </p>
       <h2>Stats and scores</h2>
       <p>
-        High scores, stats, and play counts stay on your machine. The extension
-        does not send telemetry. You do not need a network connection or an
-        account to play. Sign in from the activity bar is optional.
+        High scores, stats, and play counts stay on your machine unless you opt
+        in on the dashboard Analytics page. You do not need a network connection
+        or an account to play. Sign in from the activity bar is optional.
       </p>
     </DocsProse>
   );

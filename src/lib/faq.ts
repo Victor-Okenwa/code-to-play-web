@@ -78,13 +78,13 @@ export const DOCS_FAQS: readonly FaqItem[] = [
     id: "privacy",
     question: "Where do high scores and stats live?",
     answer:
-      "Locally in the editor. High scores, stats, and play counts are not sent anywhere — the extension does not include telemetry or cloud sync. Signing in only links your GitHub account; it does not upload plays or scores.",
+      "Locally in the editor by default. Signing in does not upload plays or scores. If you opt in on the dashboard, the signed-in extension can share a snapshot (lines, plays, high scores) so you can see a breakdown on the web. Turn it off to stop uploads and delete that snapshot.",
   },
   {
     id: "account",
     question: "Do I need an account?",
     answer:
-      "No. Free games, unlocks, and high scores work locally with no account. Sign in from the Code to Play activity bar when you want to link GitHub — that is how Pro will attach later. Signing in does not upload plays or scores.",
+      "No. Free games, unlocks, and high scores work locally with no account. Sign in from the Code to Play activity bar when you want to link GitHub — that is how Pro will attach later. Signing in does not upload plays or scores unless you opt in on the Analytics page.",
   },
   {
     id: "editors",

@@ -26,7 +26,7 @@ export default async function DashboardOverviewPage() {
   return (
     <DashboardPageShell
       title={`Welcome, ${session.user.name}`}
-      description="Write meaningful lines in your editor to unlock plays. Scores and play counts stay local — this dashboard is your web account."
+      description="Write meaningful lines in your editor to unlock plays. Scores stay local unless you opt in on Analytics."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <Card>

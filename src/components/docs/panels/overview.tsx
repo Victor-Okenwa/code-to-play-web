@@ -28,8 +28,8 @@ export function OverviewPanel() {
       <p>
         Free includes {FREE_GAMES.join(" and ")}. Pro adds{" "}
         {PRO_GAMES.join(" and ")}. All have difficulty levels. High scores,
-        stats, and play counts stay on your machine — the extension does not
-        send telemetry.
+        stats, and play counts stay on your machine unless you opt in on the
+        dashboard. The extension does not send source or file paths.
       </p>
       <h2>Where to go next</h2>
       <ul>

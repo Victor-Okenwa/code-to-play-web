@@ -15,6 +15,13 @@
       "when": 1786998248287,
       "tag": "0001_cultured_hellcat",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1787006906263,
+      "tag": "0002_special_jack_power",
+      "breakpoints": true
     }
   ]
 }

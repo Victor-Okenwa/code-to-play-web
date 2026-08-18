@@ -54,7 +54,7 @@ export function FeatureVisual({
         <NoteVisual
           icon={HardDrive}
           title="Local unless you say otherwise"
-          body="Analytics would only happen if you grant access. Until then, nothing is sent."
+          body="Analytics only happen if you grant access on the dashboard. Until then, nothing is sent."
         />
       );
     case "free":
