@@ -56,37 +56,28 @@ export function SplashLoader() {
           aria-busy="true"
           aria-live="polite"
           className="fixed inset-0 z-[100] flex items-center justify-center"
+          style={{ WebkitBackdropFilter: "blur(var(--splash-blur, 32px))" }}
           initial={{
             opacity: 1,
             backgroundColor: "rgba(0,0,0,0.5)",
             backdropFilter: "blur(32px)",
-            WebkitBackdropFilter: "blur(32px)",
+            ["--splash-blur" as string]: "32px",
           }}
           animate={{
             opacity: 1,
             backgroundColor: "rgba(0,0,0,0)",
             backdropFilter: "blur(0px)",
-            WebkitBackdropFilter: "blur(0px)",
+            ["--splash-blur" as string]: "0px",
           }}
           exit={{
             opacity: 0,
             backgroundColor: "rgba(0,0,0,0)",
             backdropFilter: "blur(0px)",
-            WebkitBackdropFilter: "blur(0px)",
+            ["--splash-blur" as string]: "0px",
           }}
           transition={{
-            backgroundColor: {
-              duration: reduceMotion ? 0.2 : SHAKE_SECONDS + REST_SECONDS,
-              ease: "linear",
-            },
-            backdropFilter: {
-              duration: reduceMotion ? 0.2 : SHAKE_SECONDS + REST_SECONDS,
-              ease: "linear",
-            },
-            WebkitBackdropFilter: {
-              duration: reduceMotion ? 0.2 : SHAKE_SECONDS + REST_SECONDS,
-              ease: "linear",
-            },
+            duration: reduceMotion ? 0.2 : SHAKE_SECONDS + REST_SECONDS,
+            ease: "linear",
             opacity: { duration: 0.35, ease: "easeOut" },
           }}
         >

@@ -1,9 +1,17 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "code-to-play",
+  "name": "code-to-play-web",
   "compatibility_date": "2026-08-04",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "code-to-play.com",
+      "custom_domain": true,
+    },
+  ],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
@@ -11,10 +19,17 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "code-to-play"
+      "service": "code-to-play-web"
     }
   ],
   "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "code-to-play",
+      // Replace after: bunx wrangler d1 create code-to-play
+      "database_id": "11f7f635-96fb-49c7-b80b-a834b23da244",
+      "migrations_dir": "drizzle"
+    },
     {
       "binding": "code_to_play",
       "database_name": "code-to-play",
@@ -23,5 +38,20 @@
   ],
   "images": {
     "binding": "IMAGES"
+  },
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
   }
 }

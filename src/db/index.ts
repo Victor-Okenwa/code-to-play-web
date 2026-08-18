@@ -1,28 +1,15 @@
-import { createClient } from "@libsql/client";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import type { DrizzleD1Database } from "drizzle-orm/d1";
 import { drizzle as drizzleD1 } from "drizzle-orm/d1";
-import type { LibSQLDatabase } from "drizzle-orm/libsql";
-import { drizzle as drizzleLibsql } from "drizzle-orm/libsql";
+import type { LibsqlDb } from "./libsql";
 import * as schema from "./schema";
 
-export type AppDb =
-  | LibSQLDatabase<typeof schema>
-  | DrizzleD1Database<typeof schema>;
-
-let libsqlDb: LibSQLDatabase<typeof schema> | undefined;
-
-function getLibsqlDb(url: string): LibSQLDatabase<typeof schema> {
-  if (!libsqlDb) {
-    libsqlDb = drizzleLibsql({ client: createClient({ url }), schema });
-  }
-
-  return libsqlDb;
-}
+export type AppDb = LibsqlDb | DrizzleD1Database<typeof schema>;
 
 export async function getDb(): Promise<AppDb> {
   const fileName = process.env.DB_FILE_NAME;
   if (process.env.NODE_ENV === "development" && fileName) {
+    const { getLibsqlDb } = await import("./libsql");
     return getLibsqlDb(fileName);
   }
 
