@@ -13,6 +13,8 @@ import {
   UNLOCK_PROGRESS_DEMO,
 } from "@/lib/features";
 
+import { ProGamesAccordion } from "./pro-games-accordion";
+
 const HIGH_SCORES = [
   { difficulty: "Easy", score: 11 },
   { difficulty: "Medium", score: 7 },
@@ -46,7 +48,7 @@ export function FeatureVisual({
         <NoteVisual
           icon={WifiOff}
           title="No connection required"
-          body="Tracking, unlocks, and both games run entirely in the editor."
+          body="Tracking, unlocks, and games run entirely in the editor."
         />
       );
     case "your-data":
@@ -178,9 +180,22 @@ function ShareableStatsPreview() {
 
 function GamesPreview() {
   return (
-    <div className="grid gap-4 xl:grid-cols-2">
-      <DebugSnakeMock className="w-full" />
-      <WhackABugMock className="w-full" />
+    <div className="space-y-6">
+      <div className="space-y-3">
+        <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          Free
+        </p>
+        <div className="grid gap-4 xl:grid-cols-2">
+          <DebugSnakeMock className="w-full" />
+          <WhackABugMock className="w-full" />
+        </div>
+      </div>
+      <div className="space-y-3">
+        <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+          Pro games
+        </p>
+        <ProGamesAccordion />
+      </div>
     </div>
   );
 }

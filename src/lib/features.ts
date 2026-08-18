@@ -146,7 +146,7 @@ export const FEATURES = [
   {
     id: "in-editor-games",
     title: "Games in the editor",
-    body: "Games open as a webview. Spend a play without leaving your files or your cursor.",
+    body: "Games open as a webview. Spend a play without leaving your files or your cursor. Free includes Debug Snake and Whack-a-Bug. Pro adds Call Stack and Merge Conflict.",
     home: false,
   },
   {

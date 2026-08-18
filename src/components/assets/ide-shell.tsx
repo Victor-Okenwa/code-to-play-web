@@ -18,7 +18,11 @@ import { cn } from "@/lib/utils";
 
 import { Logo } from "./logo";
 
-export type IdeGame = "Debug Snake" | "Whack-a-Bug";
+export type IdeGame =
+  | "Debug Snake"
+  | "Whack-a-Bug"
+  | "Call Stack"
+  | "Merge Conflict";
 
 type IdeShellProps = {
   className?: ClassValue;
@@ -55,10 +59,12 @@ function GameRow({
   name,
   plays,
   selected = false,
+  premium = false,
 }: {
   name: IdeGame;
   plays: number;
   selected?: boolean;
+  premium?: boolean;
 }) {
   return (
     <div
@@ -67,7 +73,14 @@ function GameRow({
         selected && "bg-editor-foreground/8 text-editor-foreground",
       )}
     >
-      <span className="truncate">{name}</span>
+      <span className="truncate">
+        {name}
+        {premium ? (
+          <span className="ml-1 text-[9px] tracking-wide text-primary uppercase">
+            Pro
+          </span>
+        ) : null}
+      </span>
       <span className="flex shrink-0 items-center gap-0.5 text-primary">
         <Play className="size-3 fill-primary" />
         {plays} plays
@@ -154,6 +167,22 @@ export function IdeShell({
             name="Whack-a-Bug"
             plays={plays}
             selected={selectedGame === "Whack-a-Bug"}
+          />
+          <span className="mt-1 flex items-center gap-1 text-editor-foreground/50">
+            <Folder className="size-3" />
+            Pro Games
+          </span>
+          <GameRow
+            name="Call Stack"
+            plays={plays}
+            selected={selectedGame === "Call Stack"}
+            premium
+          />
+          <GameRow
+            name="Merge Conflict"
+            plays={plays}
+            selected={selectedGame === "Merge Conflict"}
+            premium
           />
           <div className="mt-auto flex flex-col gap-1.5 border-t border-dashed border-editor-border pt-3 text-editor-foreground/50">
             <span>View Statistics</span>

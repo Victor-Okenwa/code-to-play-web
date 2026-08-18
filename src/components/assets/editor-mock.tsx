@@ -57,7 +57,7 @@ export function EditorMock({ className }: { className?: ClassValue }) {
     <IdeShell
       className={className}
       windowTitle="game-object.ts — code-to-play"
-      ariaLabel="Code to Play running inside VS Code: the Available Games sidebar lists Debug Snake and Whack-a-Bug with 5 plays each, the editor shows game-object.ts with main.rs in another tab, and the status bar reads Code to Play (5)."
+      ariaLabel="Code to Play running inside VS Code: the Available Games sidebar lists Debug Snake, Whack-a-Bug, Call Stack, and Merge Conflict with 5 plays each, the editor shows game-object.ts with main.rs in another tab, and the status bar reads Code to Play (5)."
       statusRight={
         <span className="hidden sm:inline">TypeScript · Ln 12, Col 18</span>
       }
@@ -102,16 +102,33 @@ export function EditorMock({ className }: { className?: ClassValue }) {
         <div className="mt-2.5 grid grid-cols-2 gap-2">
           <GameTile name="Debug Snake" plays={5} />
           <GameTile name="Whack-a-Bug" plays={5} />
+          <GameTile name="Call Stack" plays={5} premium />
+          <GameTile name="Merge Conflict" plays={5} premium />
         </div>
       </div>
     </IdeShell>
   );
 }
 
-function GameTile({ name, plays }: { name: string; plays: number }) {
+function GameTile({
+  name,
+  plays,
+  premium = false,
+}: {
+  name: string;
+  plays: number;
+  premium?: boolean;
+}) {
   return (
     <div className="flex items-center justify-between gap-1 rounded-md border border-editor-border bg-editor px-2.5 py-2">
-      <p className="truncate text-[11px] font-medium">{name}</p>
+      <p className="truncate text-[11px] font-medium">
+        {name}
+        {premium ? (
+          <span className="ml-1 text-[9px] tracking-wide text-primary uppercase">
+            Pro
+          </span>
+        ) : null}
+      </p>
       <span className="flex shrink-0 items-center gap-0.5 font-mono text-[10px] text-primary">
         <Play className="size-3 fill-primary" />
         {plays}
