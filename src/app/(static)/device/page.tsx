@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { DeviceAuthorizeCard } from "@/components/auth/device-authorize-card";
-import { auth } from "@/lib/auth";
+import { getAuth } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: "Link editor — Code to Play",
@@ -21,6 +21,7 @@ export default async function DevicePage({
 }) {
   const params = await searchParams;
   const userCode = firstSearchParam(params.user_code);
+  const auth = await getAuth();
   const session = await auth.api.getSession({
     headers: await headers(),
   });

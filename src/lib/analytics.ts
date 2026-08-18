@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { db } from "@/db";
+import { getDb } from "@/db";
 import { userAnalytics, userStats } from "@/db/schema";
 import {
   parseStoredSnapshot,
@@ -8,6 +8,7 @@ import {
 } from "@/lib/stats";
 
 export async function getAnalyticsOptIn(userId: string): Promise<boolean> {
+  const db = await getDb();
   const [row] = await db
     .select()
     .from(userAnalytics)
@@ -21,6 +22,7 @@ export async function setAnalyticsOptIn(
   userId: string,
   optedIn: boolean,
 ): Promise<void> {
+  const db = await getDb();
   const now = new Date();
 
   await db
@@ -48,6 +50,7 @@ export async function setAnalyticsOptIn(
 export async function getUserStats(
   userId: string,
 ): Promise<StoredUserStats | null> {
+  const db = await getDb();
   const [row] = await db
     .select()
     .from(userStats)
@@ -73,6 +76,7 @@ export async function upsertUserStats(
   userId: string,
   snapshot: StatsSnapshot,
 ): Promise<Date> {
+  const db = await getDb();
   const syncedAt = new Date();
 
   await db

@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "code-to-play",
+  "compatibility_date": "2026-08-04",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "code-to-play"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "code_to_play",
+      "database_name": "code-to-play",
+      "database_id": "11f7f635-96fb-49c7-b80b-a834b23da244"
+    }
+  ],
+  "images": {
+    "binding": "IMAGES"
+  }
+}

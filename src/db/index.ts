@@ -1,13 +1,41 @@
 import { createClient } from "@libsql/client";
-import { drizzle } from "drizzle-orm/libsql";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import type { DrizzleD1Database } from "drizzle-orm/d1";
+import { drizzle as drizzleD1 } from "drizzle-orm/d1";
+import type { LibSQLDatabase } from "drizzle-orm/libsql";
+import { drizzle as drizzleLibsql } from "drizzle-orm/libsql";
 import * as schema from "./schema";
 
-const databaseUrl = process.env.DB_FILE_NAME;
+export type AppDb =
+  | LibSQLDatabase<typeof schema>
+  | DrizzleD1Database<typeof schema>;
 
-if (!databaseUrl) {
-  throw new Error("DB_FILE_NAME is not set");
+let libsqlDb: LibSQLDatabase<typeof schema> | undefined;
+
+function getLibsqlDb(url: string): LibSQLDatabase<typeof schema> {
+  if (!libsqlDb) {
+    libsqlDb = drizzleLibsql({ client: createClient({ url }), schema });
+  }
+
+  return libsqlDb;
 }
 
-const client = createClient({ url: databaseUrl });
+export async function getDb(): Promise<AppDb> {
+  const fileName = process.env.DB_FILE_NAME;
+  if (process.env.NODE_ENV === "development" && fileName) {
+    return getLibsqlDb(fileName);
+  }
 
-export const db = drizzle({ client, schema });
+  try {
+    const { env } = await getCloudflareContext({ async: true });
+    if (env.DB) {
+      return drizzleD1(env.DB, { schema });
+    }
+  } catch {
+    // Plain `next dev` / tests without a Cloudflare context.
+  }
+
+  throw new Error(
+    "No database configured. Set DB_FILE_NAME for local Next.js, or bind D1 as DB on Cloudflare.",
+  );
+}

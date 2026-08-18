@@ -3,7 +3,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import { SignInCard } from "@/components/auth/signin-card";
-import { auth } from "@/lib/auth";
+import { getAuth } from "@/lib/auth";
 import { callbackUrlFromSearchParam } from "@/lib/auth-callback";
 
 export const metadata: Metadata = {
@@ -19,6 +19,7 @@ export default async function SignInPage({
 }) {
   const params = await searchParams;
   const callbackURL = callbackUrlFromSearchParam(params.callbackURL);
+  const auth = await getAuth();
   const session = await auth.api.getSession({
     headers: await headers(),
   });

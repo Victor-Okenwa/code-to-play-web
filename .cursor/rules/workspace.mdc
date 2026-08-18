@@ -30,17 +30,20 @@ Use Better Auth for all authentication. Do not add NextAuth, Clerk, or custom se
 
 When implementing auth, follow this layout:
 
-- Server instance: `src/lib/auth.ts` (`betterAuth`, `nextCookies()` last in `plugins`)
+- Server instance: `src/lib/auth.ts` — `getAuth()` factory (`betterAuth`, `nextCookies()` last in `plugins`). Do not export a module-level `auth` singleton; D1 is only available per request on Cloudflare.
 - React client: `src/lib/auth-client.ts` (`createAuthClient` from `better-auth/react`)
-- Route handler: `src/app/api/auth/[...all]/route.ts` with `toNextJsHandler(auth)`
+- Route handler: `src/app/api/auth/[...all]/route.ts` calls `(await getAuth()).handler(request)`
 - Route protection: `proxy.ts` (Next.js 16; not `middleware.ts`)
+- Database: `getDb()` in `src/db/index.ts` — libSQL `file:local.db` during `bun run dev`, D1 binding `DB` on Cloudflare
 
 ```ts
-import { auth } from "@/lib/auth";
-import { toNextJsHandler } from "better-auth/next-js";
+import { getAuth } from "@/lib/auth";
 
-export const { GET, POST } = toNextJsHandler(auth);
+export async function GET(request: Request) {
+  const auth = await getAuth();
+  return auth.handler(request);
+}
 ```
 
-- Cookie checks in `proxy.ts` are optimistic only. Always validate with `auth.api.getSession({ headers: await headers() })` in Server Components, Server Actions, and route handlers.
+- Cookie checks in `proxy.ts` are optimistic only. Always validate with `(await getAuth()).api.getSession({ headers: await headers() })` in Server Components, Server Actions, and route handlers.
 - Client sign-in/up/out goes through `authClient`. Server mutations that set cookies must run where `nextCookies()` can apply.
