@@ -5,10 +5,7 @@ import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { userEntitlements } from "@/db/schema";
 import { isPlaySpaceProduct, isProProduct } from "@/lib/polar";
-import {
-  PLAY_SPACE_COOLDOWN_HOURS,
-  PRO_EXTRA_PLAY_SPACES,
-} from "@/lib/pricing";
+import { PLAY_SPACE_COOLDOWN_MS, PRO_EXTRA_PLAY_SPACES } from "@/lib/pricing";
 
 export const PRO_GAME_IDS = ["call-stack", "merge-conflict"] as const;
 
@@ -39,7 +36,7 @@ const EMPTY_ENTITLEMENTS: Omit<UserEntitlements, "userId" | "updatedAt"> = {
 };
 
 function cooldownMs() {
-  return PLAY_SPACE_COOLDOWN_HOURS * 60 * 60 * 1000;
+  return PLAY_SPACE_COOLDOWN_MS;
 }
 
 export function playSpaceCooldownEndsAt(

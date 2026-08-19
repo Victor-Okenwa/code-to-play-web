@@ -61,9 +61,14 @@ export async function POST(request: Request) {
   );
   if (remainingMs > 0) {
     const hours = Math.ceil(remainingMs / (60 * 60 * 1000));
+    const minutes = Math.max(1, Math.ceil(remainingMs / (60 * 1000)));
+    const remaining =
+      remainingMs < 60 * 60 * 1000
+        ? `${minutes} more minute${minutes === 1 ? "" : "s"}`
+        : `${hours} more hour${hours === 1 ? "" : "s"}`;
     return NextResponse.json(
       {
-        error: `Play space purchases are locked for about ${hours} more hour${hours === 1 ? "" : "s"} (${PLAY_SPACE_COOLDOWN_HOURS}-hour cooldown).`,
+        error: `Play space purchases are locked for about ${remaining} (${PLAY_SPACE_COOLDOWN_HOURS}-hour cooldown).`,
         playSpaceCooldownEndsAt: new Date(
           Date.now() + remainingMs,
         ).toISOString(),

@@ -2,9 +2,10 @@
 
 import { Check, Minus, Plus } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
+import { CooldownCountdown } from "@/components/pricing/cooldown-countdown";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
@@ -88,15 +89,27 @@ function signInHref(callbackURL: string) {
 
 export function PlaySpacesCard({
   callbackURL = "/pricing",
-  cooldownEndsAt = null,
+  cooldownEndsAt: cooldownEndsAtProp = null,
+  layout = "stacked",
 }: {
   callbackURL?: string;
   cooldownEndsAt?: string | null;
+  layout?: "stacked" | "wide";
 }) {
   const { data: session, isPending } = authClient.useSession();
   const [quantity, setQuantity] = useState(PLAY_SPACE_MIN);
   const [pending, setPending] = useState(false);
+  const [cooldownEndsAt, setCooldownEndsAt] = useState(cooldownEndsAtProp);
   const playTotal = quantity * PLAY_SPACE_PRICE;
+
+  useEffect(() => {
+    setCooldownEndsAt(cooldownEndsAtProp);
+  }, [cooldownEndsAtProp]);
+
+  const handleCooldownDone = useCallback(() => {
+    setCooldownEndsAt(null);
+  }, []);
+
   const cooldownActive =
     cooldownEndsAt !== null && new Date(cooldownEndsAt).getTime() > Date.now();
 
@@ -115,6 +128,96 @@ export function PlaySpacesCard({
       );
       setPending(false);
     }
+  }
+
+  const cooldownNotice =
+    cooldownActive && cooldownEndsAt ? (
+      <CooldownCountdown endsAt={cooldownEndsAt} onDone={handleCooldownDone} />
+    ) : null;
+
+  const stepper = (
+    <div className="flex items-center gap-2">
+      <Button
+        type="button"
+        variant="outline"
+        size="icon-sm"
+        aria-label="Fewer play spaces"
+        disabled={quantity <= PLAY_SPACE_MIN}
+        onClick={() =>
+          setQuantity((value) => Math.max(PLAY_SPACE_MIN, value - 1))
+        }
+      >
+        <Minus />
+      </Button>
+      <span className="min-w-8 text-center font-heading text-lg font-semibold tabular-nums">
+        {quantity}
+      </span>
+      <Button
+        type="button"
+        variant="outline"
+        size="icon-sm"
+        aria-label="More play spaces"
+        disabled={quantity >= PLAY_SPACE_MAX}
+        onClick={() =>
+          setQuantity((value) => Math.min(PLAY_SPACE_MAX, value + 1))
+        }
+      >
+        <Plus />
+      </Button>
+    </div>
+  );
+
+  const buyButton = (
+    <Button
+      type="button"
+      className="w-full"
+      disabled={pending || isPending || cooldownActive}
+      onClick={() => void buy()}
+    >
+      {cooldownActive
+        ? "On cooldown"
+        : session
+          ? `Buy ${quantity} ${quantity === 1 ? "space" : "spaces"}`
+          : "Sign in to buy"}
+    </Button>
+  );
+
+  if (layout === "wide") {
+    return (
+      <Card className="w-full">
+        <CardContent className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="max-w-xl space-y-2">
+            <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+              Add-on
+            </p>
+            <h2 className="font-heading text-xl font-semibold">Play spaces</h2>
+            <p className="text-sm text-muted-foreground">
+              Buy extra play spaces when you have already earned your loop and
+              still want a short break. Buy {PLAY_SPACE_MIN} to {PLAY_SPACE_MAX}{" "}
+              at a time; after a purchase, the next buy is locked for{" "}
+              {PLAY_SPACE_COOLDOWN_HOURS} hours so you stay concentrated on
+              writing code.
+            </p>
+            {cooldownNotice}
+          </div>
+          <div className="flex w-full shrink-0 flex-col gap-3 md:w-56 md:items-end">
+            <div className="space-y-1 md:text-right">
+              <Price
+                current={formatUsd(playTotal)}
+                suffix={
+                  quantity === 1 ? "for 1 space" : `for ${quantity} spaces`
+                }
+              />
+              <p className="text-xs text-muted-foreground">
+                {formatUsd(PLAY_SPACE_PRICE)} each
+              </p>
+            </div>
+            {stepper}
+            {buyButton}
+          </div>
+        </CardContent>
+      </Card>
+    );
   }
 
   return (
@@ -136,35 +239,7 @@ export function PlaySpacesCard({
           <p className="text-xs text-muted-foreground">
             {formatUsd(PLAY_SPACE_PRICE)} each
           </p>
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="icon-sm"
-              aria-label="Fewer play spaces"
-              disabled={quantity <= PLAY_SPACE_MIN}
-              onClick={() =>
-                setQuantity((value) => Math.max(PLAY_SPACE_MIN, value - 1))
-              }
-            >
-              <Minus />
-            </Button>
-            <span className="min-w-8 text-center font-heading text-lg font-semibold tabular-nums">
-              {quantity}
-            </span>
-            <Button
-              type="button"
-              variant="outline"
-              size="icon-sm"
-              aria-label="More play spaces"
-              disabled={quantity >= PLAY_SPACE_MAX}
-              onClick={() =>
-                setQuantity((value) => Math.min(PLAY_SPACE_MAX, value + 1))
-              }
-            >
-              <Plus />
-            </Button>
-          </div>
+          {stepper}
         </div>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4">
@@ -173,31 +248,9 @@ export function PlaySpacesCard({
           a purchase, the next buy is locked for {PLAY_SPACE_COOLDOWN_HOURS}{" "}
           hours so you stay concentrated on writing code.
         </p>
-        {cooldownActive ? (
-          <p className="text-sm text-muted-foreground">
-            Next purchase unlocks{" "}
-            {new Date(cooldownEndsAt).toLocaleString(undefined, {
-              dateStyle: "medium",
-              timeStyle: "short",
-            })}
-            .
-          </p>
-        ) : null}
+        {cooldownNotice}
       </CardContent>
-      <CardFooter className="mt-auto">
-        <Button
-          type="button"
-          className="w-full"
-          disabled={pending || isPending || cooldownActive}
-          onClick={() => void buy()}
-        >
-          {cooldownActive
-            ? "On cooldown"
-            : session
-              ? `Buy ${quantity} ${quantity === 1 ? "space" : "spaces"}`
-              : "Sign in to buy"}
-        </Button>
-      </CardFooter>
+      <CardFooter className="mt-auto">{buyButton}</CardFooter>
     </Card>
   );
 }

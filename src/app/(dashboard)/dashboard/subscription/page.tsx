@@ -8,6 +8,7 @@ import {
   PlaySpacesCard,
 } from "@/components/pricing/pricing-cards";
 import { SubscriptionProButton } from "@/components/pricing/subscription-pro-button";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -44,16 +45,35 @@ export default async function DashboardSubscriptionPage() {
     <DashboardPageShell
       title="Subscription"
       description={`You are on ${plan}. Pro starts with a ${PRO_TRIAL_COPY}, then extra play spaces, Call Stack, and Merge Conflict. Play spaces are a one-off add-on, with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys.`}
+      actions={
+        entitlements.isPro ? (
+          <ManageBillingButton />
+        ) : (
+          <SubscriptionProButton slug={POLAR_SLUG_PRO_MONTHLY} />
+        )
+      }
     >
       <Suspense>
         <CheckoutSuccessToast />
       </Suspense>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <Card>
+      <PlaySpacesCard
+        layout="wide"
+        callbackURL="/dashboard/subscription"
+        cooldownEndsAt={entitlements.playSpaceCooldownEndsAt}
+      />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Card
+          className={entitlements.isPro ? undefined : "ring-2 ring-primary"}
+        >
           <CardHeader>
-            <CardTitle>Free</CardTitle>
+            <div className="flex items-center justify-between gap-2">
+              <CardTitle>Free</CardTitle>
+              {entitlements.isPro ? null : <Badge>Current plan</Badge>}
+            </div>
             <CardDescription>
-              {entitlements.isPro ? "Included in Pro" : "Current plan"}
+              {entitlements.isPro
+                ? "Included in Pro"
+                : "Earn plays by writing meaningful code."}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -64,12 +84,17 @@ export default async function DashboardSubscriptionPage() {
             </ul>
           </CardContent>
         </Card>
-        <Card>
+        <Card
+          className={entitlements.isPro ? "ring-2 ring-primary" : undefined}
+        >
           <CardHeader>
-            <CardTitle>Pro</CardTitle>
+            <div className="flex items-center justify-between gap-2">
+              <CardTitle>Pro</CardTitle>
+              {entitlements.isPro ? <Badge>Current plan</Badge> : null}
+            </div>
             <CardDescription>
               {entitlements.isPro
-                ? "Current plan"
+                ? "Extra play spaces, Call Stack, and Merge Conflict."
                 : `${PRO_TRIAL_COPY}, then ${formatUsd(PRO_MONTHLY)} / month`}
             </CardDescription>
           </CardHeader>
@@ -79,22 +104,13 @@ export default async function DashboardSubscriptionPage() {
                 <li key={feature}>{feature}</li>
               ))}
             </ul>
-            {entitlements.isPro ? (
-              <ManageBillingButton />
-            ) : (
-              <div className="flex flex-wrap gap-2">
-                <SubscriptionProButton slug={POLAR_SLUG_PRO_MONTHLY} />
-                <Button nativeButton={false} render={<Link href="/pricing" />}>
-                  View pricing
-                </Button>
-              </div>
+            {entitlements.isPro ? null : (
+              <Button nativeButton={false} render={<Link href="/pricing" />}>
+                View pricing
+              </Button>
             )}
           </CardContent>
         </Card>
-        <PlaySpacesCard
-          callbackURL="/dashboard/subscription"
-          cooldownEndsAt={entitlements.playSpaceCooldownEndsAt}
-        />
       </div>
     </DashboardPageShell>
   );
