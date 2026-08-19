@@ -1,4 +1,5 @@
 import { GITHUB_URL, UNLOCK_LINES, UNLOCK_PLAYS } from "@/lib/extension";
+import { PRO_TRIAL_COPY } from "@/lib/pricing";
 
 export const UNLOCK_PROGRESS_DEMO = 450;
 
@@ -146,7 +147,7 @@ export const FEATURES = [
   {
     id: "in-editor-games",
     title: "Games in the editor",
-    body: "Games open as a webview. Spend a play without leaving your files or your cursor. Free includes Debug Snake and Whack-a-Bug. Pro adds Call Stack and Merge Conflict.",
+    body: `Games open as a webview. Spend a play without leaving your files or your cursor. Free includes Debug Snake and Whack-a-Bug. Pro adds Call Stack and Merge Conflict, with a ${PRO_TRIAL_COPY}.`,
     home: false,
   },
   {

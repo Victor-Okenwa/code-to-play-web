@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DocsProse } from "@/components/docs/docs-prose";
 import { docsPath } from "@/lib/docs";
 import { UNLOCK_LINES, UNLOCK_PLAYS } from "@/lib/extension";
+import { PRO_TRIAL_COPY } from "@/lib/pricing";
 
 export function GettingStartedPanel() {
   return (
@@ -11,6 +12,7 @@ export function GettingStartedPanel() {
         You do not need an account or a network connection to play. Install the
         extension, write code, and unlock plays locally in the editor. Sign in
         from the activity bar is optional and is how you will link Pro later.
+        Pro starts with a {PRO_TRIAL_COPY}.
       </p>
       <h2>What you need</h2>
       <ul>

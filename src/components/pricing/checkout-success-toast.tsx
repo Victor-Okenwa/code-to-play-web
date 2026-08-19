@@ -15,7 +15,9 @@ export function CheckoutSuccessToast() {
     }
 
     shown.current = true;
-    toast.success("Payment received. Pro and play spaces update in a moment.");
+    toast.success(
+      "You're in. Pro, the trial, and play spaces update in a moment.",
+    );
     router.replace("/dashboard/subscription", { scroll: false });
   }, [router, searchParams]);
 

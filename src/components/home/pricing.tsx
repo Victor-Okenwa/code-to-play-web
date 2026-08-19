@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { PricingCards } from "@/components/pricing/pricing-cards";
 import { copyReveal, copyRevealStagger } from "@/lib/motion";
+import { PRO_TRIAL_COPY } from "@/lib/pricing";
 
 export function Pricing() {
   return (
@@ -33,8 +34,9 @@ export function Pricing() {
             className="max-w-2xl text-lg text-muted-foreground"
             variants={copyReveal}
           >
-            The loop stays free: write code, unlock plays, take a break. Pro and
-            play spaces are optional when you want extra.
+            The loop stays free: write code, unlock plays, take a break. Pro
+            starts with a {PRO_TRIAL_COPY}. Play spaces are optional when you
+            want extra.
           </motion.p>
         </motion.hgroup>
 

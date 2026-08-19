@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { LISTED_GAMES } from "@/lib/games";
+import { PRO_TRIAL_COPY } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Games — Code to Play",
@@ -19,7 +20,7 @@ export default function DashboardGamesPage() {
   return (
     <DashboardPageShell
       title="Games"
-      description="Unlock plays in your editor, then take a break in Debug Snake or Whack-a-Bug. Pro adds Call Stack, Merge Conflict, and extra play spaces."
+      description={`Unlock plays in your editor, then take a break in Debug Snake or Whack-a-Bug. Pro adds Call Stack, Merge Conflict, and extra play spaces, and starts with a ${PRO_TRIAL_COPY}.`}
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {LISTED_GAMES.map((game) => (

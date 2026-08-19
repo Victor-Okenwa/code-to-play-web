@@ -33,6 +33,7 @@ import {
   PRO_FEATURES,
   PRO_MONTHLY,
   PRO_MONTHLY_WAS,
+  PRO_TRIAL_COPY,
   PRO_YEARLY,
   PRO_YEARLY_DISCOUNT,
   PRO_YEARLY_WAS,
@@ -264,12 +265,12 @@ export function PricingCards() {
       <Card className="flex h-full flex-col ring-2 ring-primary">
         <CardHeader>
           <p className="text-xs font-semibold tracking-wide text-primary uppercase">
-            Subscription
+            Subscription · {PRO_TRIAL_COPY}
           </p>
           <CardTitle className="font-heading text-xl">Pro</CardTitle>
           <CardDescription>
             Everything in Free, extra play spaces, Call Stack, and Merge
-            Conflict.
+            Conflict. Start with a {PRO_TRIAL_COPY}.
           </CardDescription>
           <Tabs
             value={interval}
@@ -311,15 +312,19 @@ export function PricingCards() {
         <CardContent className="flex flex-1 flex-col gap-4">
           <FeatureList items={PRO_FEATURES} />
         </CardContent>
-        <CardFooter className="mt-auto">
+        <CardFooter className="mt-auto flex flex-col gap-2">
           <Button
             type="button"
             className="w-full"
             disabled={pending || isPending}
             onClick={() => void checkoutPro()}
           >
-            {session ? "Get Pro" : "Sign in for Pro"}
+            {session ? `Start ${PRO_TRIAL_COPY}` : "Sign in to start the trial"}
           </Button>
+          <p className="text-center text-xs text-muted-foreground">
+            Then {formatUsd(PRO_MONTHLY)}/month or yearly. Cancel during the
+            trial and you are not charged.
+          </p>
         </CardFooter>
       </Card>
 

@@ -24,6 +24,7 @@ import {
   PLAY_SPACE_COOLDOWN_HOURS,
   PRO_FEATURES,
   PRO_MONTHLY,
+  PRO_TRIAL_COPY,
 } from "@/lib/pricing";
 import { requireSession } from "@/lib/session";
 
@@ -42,7 +43,7 @@ export default async function DashboardSubscriptionPage() {
   return (
     <DashboardPageShell
       title="Subscription"
-      description={`You are on ${plan}. Pro adds extra play spaces, Call Stack, and Merge Conflict. Play spaces are a one-off add-on, with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys.`}
+      description={`You are on ${plan}. Pro starts with a ${PRO_TRIAL_COPY}, then extra play spaces, Call Stack, and Merge Conflict. Play spaces are a one-off add-on, with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys.`}
     >
       <Suspense>
         <CheckoutSuccessToast />
@@ -69,7 +70,7 @@ export default async function DashboardSubscriptionPage() {
             <CardDescription>
               {entitlements.isPro
                 ? "Current plan"
-                : `${formatUsd(PRO_MONTHLY)} / month`}
+                : `${PRO_TRIAL_COPY}, then ${formatUsd(PRO_MONTHLY)} / month`}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

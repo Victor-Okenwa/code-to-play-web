@@ -9,6 +9,7 @@ import {
   PRO_EXTRA_PLAY_SPACES,
   PRO_MONTHLY,
   PRO_MONTHLY_WAS,
+  PRO_TRIAL_COPY,
   PRO_UPCOMING_GAMES,
   PRO_YEARLY,
 } from "@/lib/pricing";
@@ -40,7 +41,7 @@ export const HOME_FAQS: readonly FaqItem[] = [
   {
     id: "pro",
     question: "What's included in Pro?",
-    answer: `Pro includes everything in Free, plus ${PRO_EXTRA_PLAY_SPACES} extra play spaces and ${PRO_UPCOMING_GAMES}. It’s ${formatUsd(PRO_MONTHLY)}/month (${formatUsd(PRO_MONTHLY_WAS)} marked down), or 15% off billed yearly at ${formatUsd(PRO_YEARLY)}. Play spaces are a separate one-time add-on at ${formatUsd(PLAY_SPACE_PRICE)} each (${PLAY_SPACE_MIN}–${PLAY_SPACE_MAX}), with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour cooldown after a purchase so focus stays on writing code.`,
+    answer: `Pro includes everything in Free, plus ${PRO_EXTRA_PLAY_SPACES} extra play spaces and ${PRO_UPCOMING_GAMES}. New Pro checkouts start with a ${PRO_TRIAL_COPY}; cancel before it ends and you are not charged. After that it’s ${formatUsd(PRO_MONTHLY)}/month (${formatUsd(PRO_MONTHLY_WAS)} marked down), or 15% off billed yearly at ${formatUsd(PRO_YEARLY)}. Play spaces are a separate one-time add-on at ${formatUsd(PLAY_SPACE_PRICE)} each (${PLAY_SPACE_MIN}–${PLAY_SPACE_MAX}), with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour cooldown after a purchase so focus stays on writing code.`,
   },
 ];
 
