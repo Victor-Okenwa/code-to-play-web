@@ -17,7 +17,7 @@ export const CHANGELOG_RAW_URL =
 
 export const GITHUB_ISSUES_URL = `${GITHUB_URL}/issues`;
 
-export const CONTACT_EMAIL = "okenwavictor003@gmail.com";
+export const CONTACT_EMAIL = "support@code-to-play.com";
 
 export const X_HANDLE = "morse_code_001";
 
