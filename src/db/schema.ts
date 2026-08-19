@@ -124,6 +124,23 @@ export const userStats = sqliteTable("user_stats", {
   syncedAt: integer("synced_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+export const userEntitlements = sqliteTable("user_entitlements", {
+  userId: text("user_id")
+    .primaryKey()
+    .references(() => user.id, { onDelete: "cascade" }),
+  isPro: integer("is_pro", { mode: "boolean" }).default(false).notNull(),
+  polarSubscriptionId: text("polar_subscription_id"),
+  proExpiresAt: integer("pro_expires_at", { mode: "timestamp_ms" }),
+  purchasedPlaySpaces: integer("purchased_play_spaces").default(0).notNull(),
+  lastPlaySpacePurchasedAt: integer("last_play_space_purchased_at", {
+    mode: "timestamp_ms",
+  }),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" })
+    .default(sql`(cast(unixepoch('subsecond') * 1000 as integer))`)
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
 export const userRelations = relations(user, ({ many, one }) => ({
   sessions: many(session),
   accounts: many(account),
@@ -134,6 +151,10 @@ export const userRelations = relations(user, ({ many, one }) => ({
   stats: one(userStats, {
     fields: [user.id],
     references: [userStats.userId],
+  }),
+  entitlements: one(userEntitlements, {
+    fields: [user.id],
+    references: [userEntitlements.userId],
   }),
 }));
 
@@ -150,6 +171,16 @@ export const userStatsRelations = relations(userStats, ({ one }) => ({
     references: [user.id],
   }),
 }));
+
+export const userEntitlementsRelations = relations(
+  userEntitlements,
+  ({ one }) => ({
+    user: one(user, {
+      fields: [userEntitlements.userId],
+      references: [user.id],
+    }),
+  }),
+);
 
 export const sessionRelations = relations(session, ({ one }) => ({
   user: one(user, {

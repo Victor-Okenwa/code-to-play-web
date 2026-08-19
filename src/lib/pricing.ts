@@ -7,8 +7,7 @@ export const PRO_YEARLY = PRO_MONTHLY * 12 * (1 - PRO_YEARLY_DISCOUNT);
 export const PRO_YEARLY_WAS = PRO_MONTHLY * 12;
 export const PRO_EXTRA_PLAY_SPACES = 2;
 
-export const PLAY_SPACE_PRICE = 0.8;
-export const PLAY_SPACE_WAS = 1;
+export const PLAY_SPACE_PRICE = 1;
 export const PLAY_SPACE_MIN = 1;
 export const PLAY_SPACE_MAX = 10;
 export const PLAY_SPACE_COOLDOWN_HOURS = 5;

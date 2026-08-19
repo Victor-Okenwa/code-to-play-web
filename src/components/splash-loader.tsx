@@ -8,6 +8,7 @@ import { Logo } from "@/components/assets/logo";
 const SHAKE_SECONDS = 0.8;
 const REST_SECONDS = 2;
 const MIN_VISIBLE_MS = (SHAKE_SECONDS + REST_SECONDS) * 1000;
+const MAX_VISIBLE_MS = 8000;
 
 let hasShown = false;
 
@@ -41,10 +42,15 @@ export function SplashLoader() {
     }
 
     const timeout = window.setTimeout(tryHide, minVisible);
+    const failSafe = window.setTimeout(() => {
+      loadDone = true;
+      tryHide();
+    }, MAX_VISIBLE_MS);
 
     return () => {
       window.removeEventListener("load", onLoad);
       window.clearTimeout(timeout);
+      window.clearTimeout(failSafe);
     };
   }, [visible, reduceMotion]);
 
