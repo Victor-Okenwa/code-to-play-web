@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { POLAR_SLUG_PRO_MONTHLY, POLAR_SLUG_PRO_YEARLY } from "@/lib/polar";
 
 type CheckoutInput = {
   slug?: string;
@@ -29,6 +30,26 @@ function checkoutError(payload: CheckoutResponse | null, fallback: string) {
 }
 
 export async function startPolarCheckout(input: CheckoutInput) {
+  if (
+    input.slug === POLAR_SLUG_PRO_MONTHLY ||
+    input.slug === POLAR_SLUG_PRO_YEARLY
+  ) {
+    const response = await fetch("/api/checkout/pro", {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug: input.slug }),
+    });
+    const payload = (await response.json().catch(() => null)) as {
+      url?: string;
+      error?: string;
+    } | null;
+    if (!response.ok || !payload?.url) {
+      throw new Error(payload?.error ?? "Checkout could not start.");
+    }
+    window.location.href = payload.url;
+    return;
+  }
   const client = authClient as typeof authClient & {
     checkout?: (
       body: CheckoutInput & { redirect?: boolean },

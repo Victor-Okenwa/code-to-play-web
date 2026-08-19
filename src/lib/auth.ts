@@ -39,8 +39,14 @@ function createAuth(db: AppDb) {
         use: [
           checkout({
             products: async () => polarCheckoutProducts(),
-            successUrl: "/dashboard/subscription?checkout=success",
-            returnUrl: "/dashboard/subscription",
+            successUrl: new URL(
+              "/dashboard/subscription?checkout=success",
+              process.env.BETTER_AUTH_URL ?? "http://localhost:4555",
+            ).toString(),
+            returnUrl: new URL(
+              "/dashboard/subscription",
+              process.env.BETTER_AUTH_URL ?? "http://localhost:4555",
+            ).toString(),
             authenticatedUsersOnly: true,
           }),
           portal({

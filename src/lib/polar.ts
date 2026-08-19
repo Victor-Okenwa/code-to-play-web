@@ -39,6 +39,32 @@ export function isProProduct(productId: string | null | undefined) {
   );
 }
 
+export function polarAppOrigin(request: Request) {
+  const configured = process.env.BETTER_AUTH_URL;
+  if (configured) {
+    try {
+      return new URL(configured).origin;
+    } catch {
+      // Use the incoming request origin below.
+    }
+  }
+  return new URL(request.url).origin;
+}
+
+export function polarProductIdForSlug(slug: string) {
+  const ids = polarProductIds();
+  if (slug === POLAR_SLUG_PRO_MONTHLY) {
+    return ids.proMonthly;
+  }
+  if (slug === POLAR_SLUG_PRO_YEARLY) {
+    return ids.proYearly;
+  }
+  if (slug === POLAR_SLUG_PLAY_SPACE) {
+    return ids.playSpace;
+  }
+  return "";
+}
+
 export function getPolar() {
   return new Polar({
     accessToken: process.env.POLAR_ACCESS_TOKEN ?? "",

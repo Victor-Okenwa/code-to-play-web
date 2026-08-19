@@ -319,7 +319,7 @@ export function PricingCards() {
             disabled={pending || isPending}
             onClick={() => void checkoutPro()}
           >
-            {session ? `Start ${PRO_TRIAL_COPY}` : "Sign in to start the trial"}
+            {session ? "Go Pro" : "Sign in for Pro"}
           </Button>
           <p className="text-center text-xs text-muted-foreground">
             Then {formatUsd(PRO_MONTHLY)}/month or yearly. Cancel during the

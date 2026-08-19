@@ -4,7 +4,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { startPolarCheckout } from "@/lib/polar-checkout";
-import { PRO_TRIAL_COPY } from "@/lib/pricing";
 
 export function SubscriptionProButton({ slug }: { slug: string }) {
   const [pending, setPending] = useState(false);
@@ -25,7 +24,7 @@ export function SubscriptionProButton({ slug }: { slug: string }) {
         });
       }}
     >
-      Start {PRO_TRIAL_COPY}
+      Go Pro
     </Button>
   );
 }
