@@ -2,9 +2,12 @@ import type { LucideIcon } from "lucide-react";
 import {
   ChartNoAxesColumnIcon,
   CreditCardIcon,
+  FileTextIcon,
   Gamepad2Icon,
   LayoutDashboardIcon,
   PuzzleIcon,
+  ScaleIcon,
+  ShieldIcon,
   UserIcon,
 } from "lucide-react";
 
@@ -50,6 +53,15 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
     ],
   },
 ];
+
+export const DASHBOARD_LEGAL_NAV_GROUP: DashboardNavGroup = {
+  label: "Legal",
+  items: [
+    { href: "/privacy", label: "Privacy Policy", icon: ShieldIcon },
+    { href: "/legal", label: "Legal", icon: ScaleIcon },
+    { href: "/refund", label: "Refund Policy", icon: FileTextIcon },
+  ],
+};
 
 export function isDashboardNavActive(pathname: string, href: string) {
   if (href === "/dashboard") {
