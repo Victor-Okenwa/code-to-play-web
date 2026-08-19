@@ -44,7 +44,12 @@ function createAuth(db: AppDb) {
             authenticatedUsersOnly: true,
           }),
           portal({
-            returnUrl: "/dashboard/subscription",
+            // portal() parses returnUrl eagerly with `new URL(returnUrl)` (no
+            // base), so it must be absolute — a relative path throws at startup.
+            returnUrl: new URL(
+              "/dashboard/subscription",
+              process.env.BETTER_AUTH_URL ?? "http://localhost:4555",
+            ).toString(),
           }),
           webhooks({
             secret: process.env.POLAR_WEBHOOK_SECRET ?? "",
