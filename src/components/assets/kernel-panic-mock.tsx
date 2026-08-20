@@ -86,7 +86,7 @@ export function KernelPanicMock({ className }: { className?: ClassValue }) {
             <span>Score: 45</span>
             <span>High Score: 90</span>
             <span>HP: 3</span>
-            <span>Time: 41</span>
+            <span>Threat: 3</span>
           </div>
 
           <div
