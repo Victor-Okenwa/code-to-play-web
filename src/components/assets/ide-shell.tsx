@@ -22,7 +22,8 @@ export type IdeGame =
   | "Debug Snake"
   | "Whack-a-Bug"
   | "Call Stack"
-  | "Merge Conflict";
+  | "Merge Conflict"
+  | "Kernel Panic";
 
 type IdeShellProps = {
   className?: ClassValue;
@@ -182,6 +183,12 @@ export function IdeShell({
             name="Merge Conflict"
             plays={plays}
             selected={selectedGame === "Merge Conflict"}
+            premium
+          />
+          <GameRow
+            name="Kernel Panic"
+            plays={plays}
+            selected={selectedGame === "Kernel Panic"}
             premium
           />
           <div className="mt-auto flex flex-col gap-1.5 border-t border-dashed border-editor-border pt-3 text-editor-foreground/50">

@@ -57,7 +57,7 @@ export function EditorMock({ className }: { className?: ClassValue }) {
     <IdeShell
       className={className}
       windowTitle="game-object.ts — code-to-play"
-      ariaLabel="Code to Play running inside VS Code: the Available Games sidebar lists Debug Snake, Whack-a-Bug, Call Stack, and Merge Conflict with 5 plays each, the editor shows game-object.ts with main.rs in another tab, and the status bar reads Code to Play (5)."
+      ariaLabel="Code to Play running inside VS Code: the Available Games sidebar lists Debug Snake, Whack-a-Bug, Call Stack, Merge Conflict, and Kernel Panic with 5 plays each, the editor shows game-object.ts with main.rs in another tab, and the status bar reads Code to Play (5)."
       statusRight={
         <span className="hidden sm:inline">TypeScript · Ln 12, Col 18</span>
       }
@@ -104,6 +104,7 @@ export function EditorMock({ className }: { className?: ClassValue }) {
           <GameTile name="Whack-a-Bug" plays={5} />
           <GameTile name="Call Stack" plays={5} premium />
           <GameTile name="Merge Conflict" plays={5} premium />
+          <GameTile name="Kernel Panic" plays={5} premium />
         </div>
       </div>
     </IdeShell>

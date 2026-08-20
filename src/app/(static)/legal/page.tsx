@@ -13,7 +13,7 @@ import {
   MARKETPLACE_URL,
   OPEN_VSX_URL,
 } from "@/lib/extension";
-import { FREE_GAMES, PRO_GAMES } from "@/lib/pricing";
+import { FREE_GAMES, formatGameList, PRO_GAMES } from "@/lib/pricing";
 
 export const metadata: Metadata = {
   title: "Legal — Code to Play",
@@ -46,10 +46,10 @@ export default function LegalPage() {
         <h2>The product</h2>
         <p>
           Code to Play unlocks in-editor mini-games as you write meaningful
-          lines of code. Free includes {FREE_GAMES.join(" and ")}. Pro adds{" "}
-          {PRO_GAMES.join(" and ")} plus extra play spaces. Plays, scoring, and
-          unlocks run in the editor. The website is the companion for accounts,
-          billing, docs, and optional analytics.
+          lines of code. Free includes {formatGameList(FREE_GAMES)}. Pro adds{" "}
+          {formatGameList(PRO_GAMES)} plus extra play spaces. Plays, scoring,
+          and unlocks run in the editor. The website is the companion for
+          accounts, billing, docs, and optional analytics.
         </p>
         <p>
           We may change features, games, pricing, or availability. The extension

@@ -35,6 +35,7 @@ import {
   PRO_MONTHLY,
   PRO_MONTHLY_WAS,
   PRO_TRIAL_COPY,
+  PRO_UPCOMING_GAMES,
   PRO_YEARLY,
   PRO_YEARLY_DISCOUNT,
   PRO_YEARLY_WAS,
@@ -322,8 +323,8 @@ export function PricingCards() {
           </p>
           <CardTitle className="font-heading text-xl">Pro</CardTitle>
           <CardDescription>
-            Everything in Free, extra play spaces, Call Stack, and Merge
-            Conflict. Start with a {PRO_TRIAL_COPY}.
+            Everything in Free, extra play spaces, {PRO_UPCOMING_GAMES}. Start
+            with a {PRO_TRIAL_COPY}.
           </CardDescription>
           <Tabs
             value={interval}

@@ -7,6 +7,7 @@ import {
   PLAY_SPACE_COOLDOWN_HOURS,
   PRO_MONTHLY,
   PRO_TRIAL_COPY,
+  PRO_UPCOMING_GAMES,
 } from "@/lib/pricing";
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function PricingPage() {
   return (
     <PageShell
       title="Pricing"
-      description={`Install free and earn plays by writing code. Pro starts with a ${PRO_TRIAL_COPY}, then ${formatUsd(PRO_MONTHLY)}/month for extra play spaces, Call Stack, and Merge Conflict. Play spaces are also a one-off add-on, with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys.`}
+      description={`Install free and earn plays by writing code. Pro starts with a ${PRO_TRIAL_COPY}, then ${formatUsd(PRO_MONTHLY)}/month for extra play spaces, ${PRO_UPCOMING_GAMES}. Play spaces are also a one-off add-on, with a ${PLAY_SPACE_COOLDOWN_HOURS}-hour wait between buys.`}
     >
       <PricingCards />
     </PageShell>

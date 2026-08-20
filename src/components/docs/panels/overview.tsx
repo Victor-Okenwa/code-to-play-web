@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DocsProse } from "@/components/docs/docs-prose";
 import { docsPath } from "@/lib/docs";
 import { UNLOCK_LINES, UNLOCK_PLAYS } from "@/lib/extension";
-import { FREE_GAMES, PRO_GAMES, PRO_TRIAL_COPY } from "@/lib/pricing";
+import { FREE_GAMES, PRO_TRIAL_COPY, PRO_UPCOMING_GAMES } from "@/lib/pricing";
 
 export function OverviewPanel() {
   return (
@@ -26,11 +26,10 @@ export function OverviewPanel() {
       </ol>
       <h2>Games</h2>
       <p>
-        Free includes {FREE_GAMES.join(" and ")}. Pro adds{" "}
-        {PRO_GAMES.join(" and ")} and starts with a {PRO_TRIAL_COPY}. All have
-        difficulty levels. High scores, stats, and play counts stay on your
-        machine unless you opt in on the dashboard. The extension does not send
-        source or file paths.
+        Free includes {FREE_GAMES.join(" and ")}. Pro adds {PRO_UPCOMING_GAMES}{" "}
+        and starts with a {PRO_TRIAL_COPY}. All have difficulty levels. High
+        scores, stats, and play counts stay on your machine unless you opt in on
+        the dashboard. The extension does not send source or file paths.
       </p>
       <h2>Where to go next</h2>
       <ul>

@@ -1,6 +1,7 @@
 "use client";
 
 import { CallStackMock } from "@/components/assets/call-stack-mock";
+import { KernelPanicMock } from "@/components/assets/kernel-panic-mock";
 import { MergeConflictMock } from "@/components/assets/merge-conflict-mock";
 import {
   Accordion,
@@ -14,6 +15,7 @@ import { LISTED_GAMES, type ListedGame } from "@/lib/games";
 const PRO_GAME_MOCKS = {
   "Call Stack": CallStackMock,
   "Merge Conflict": MergeConflictMock,
+  "Kernel Panic": KernelPanicMock,
 } as const;
 
 type ProGameName = keyof typeof PRO_GAME_MOCKS;

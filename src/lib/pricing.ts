@@ -17,8 +17,26 @@ export const PLAY_SPACE_COOLDOWN_MS =
   PLAY_SPACE_COOLDOWN_HOURS * 60 * 60 * 1000;
 
 export const FREE_GAMES = ["Whack-a-Bug", "Debug Snake"] as const;
-export const PRO_GAMES = ["Call Stack", "Merge Conflict"] as const;
-export const PRO_UPCOMING_GAMES = PRO_GAMES.join(" and ");
+export const PRO_GAMES = [
+  "Call Stack",
+  "Merge Conflict",
+  "Kernel Panic",
+] as const;
+
+export function formatGameList(names: readonly string[]): string {
+  if (names.length === 0) {
+    return "";
+  }
+  if (names.length === 1) {
+    return names[0] ?? "";
+  }
+  if (names.length === 2) {
+    return `${names[0]} and ${names[1]}`;
+  }
+  return `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+}
+
+export const PRO_UPCOMING_GAMES = formatGameList(PRO_GAMES);
 
 export function formatUsd(amount: number): string {
   return new Intl.NumberFormat("en-US", {

@@ -7,7 +7,11 @@ import { userEntitlements } from "@/db/schema";
 import { isPlaySpaceProduct, isProProduct } from "@/lib/polar";
 import { PLAY_SPACE_COOLDOWN_MS, PRO_EXTRA_PLAY_SPACES } from "@/lib/pricing";
 
-export const PRO_GAME_IDS = ["call-stack", "merge-conflict"] as const;
+export const PRO_GAME_IDS = [
+  "call-stack",
+  "merge-conflict",
+  "kernel-panic",
+] as const;
 
 export type UserEntitlements = {
   userId: string;

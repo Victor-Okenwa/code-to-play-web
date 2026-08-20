@@ -8,7 +8,7 @@ import type { ReactNode } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CONTACT_EMAIL, GITHUB_URL } from "@/lib/extension";
 import { copyReveal, copyRevealStagger } from "@/lib/motion";
-import { PRO_TRIAL_COPY } from "@/lib/pricing";
+import { PRO_TRIAL_COPY, PRO_UPCOMING_GAMES } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 
 const PROJECT_MAILTO = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Project inquiry")}`;
@@ -26,7 +26,7 @@ const ACTIONS = [
   {
     href: "#pricing",
     label: "Go Pro",
-    description: `${PRO_TRIAL_COPY}, then extra play spaces, Call Stack, and Merge Conflict.`,
+    description: `${PRO_TRIAL_COPY}, then extra play spaces, ${PRO_UPCOMING_GAMES}.`,
     icon: Sparkles,
     external: false,
     featured: false,
