@@ -13,8 +13,8 @@ export const PLAY_SPACE_PRICE = 1;
 export const PLAY_SPACE_MIN = 1;
 export const PLAY_SPACE_MAX = 10;
 export const PLAY_SPACE_COOLDOWN_HOURS = 5;
-// TODO: testing value — restore to 5 hours (PLAY_SPACE_COOLDOWN_HOURS * 60 * 60 * 1000) before launch
-export const PLAY_SPACE_COOLDOWN_MS = 3 * 60 * 1000;
+export const PLAY_SPACE_COOLDOWN_MS =
+  PLAY_SPACE_COOLDOWN_HOURS * 60 * 60 * 1000;
 
 export const FREE_GAMES = ["Whack-a-Bug", "Debug Snake"] as const;
 export const PRO_GAMES = ["Call Stack", "Merge Conflict"] as const;

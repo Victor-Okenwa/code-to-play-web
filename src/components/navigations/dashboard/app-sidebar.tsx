@@ -43,6 +43,7 @@ function NavGroup({
                 isActive={isDashboardNavActive(pathname, item.href)}
                 tooltip={item.label}
                 render={<Link href={item.href} />}
+                className="py-6 data-active:bg-primary/10 data-active:[&_svg]:text-primary data-active:hover:bg-primary/10 data-active:hover:[&_svg]:text-primary"
               >
                 <item.icon />
                 <span>{item.label}</span>
@@ -76,18 +77,20 @@ export function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
-        {DASHBOARD_NAV_GROUPS.map((group) => (
-          <NavGroup key={group.label} group={group} pathname={pathname} />
-        ))}
-      </SidebarContent>
-      <SidebarFooter>
-        <NavGroup
-          group={DASHBOARD_LEGAL_NAV_GROUP}
-          pathname={pathname}
-          className="p-0"
-        />
-      </SidebarFooter>
+      <div className="overflow-y-auto">
+        <SidebarContent>
+          {DASHBOARD_NAV_GROUPS.map((group) => (
+            <NavGroup key={group.label} group={group} pathname={pathname} />
+          ))}
+        </SidebarContent>
+        <SidebarFooter>
+          <NavGroup
+            group={DASHBOARD_LEGAL_NAV_GROUP}
+            pathname={pathname}
+            className="p-0"
+          />
+        </SidebarFooter>
+      </div>
       <SidebarRail />
     </Sidebar>
   );
