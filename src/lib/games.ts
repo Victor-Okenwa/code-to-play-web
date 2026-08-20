@@ -21,7 +21,7 @@ const PRO_GAME_DESCRIPTIONS: Record<(typeof PRO_GAMES)[number], string> = {
   "Merge Conflict":
     "Swap ours, theirs, and base hunks until matching lines merge. Don't let HEAD overflow.",
   "Kernel Panic":
-    "Fly the kernel, shoot falling threats, and keep uptime until the clock runs out.",
+    "Fly the kernel craft, shoot falling threats, and grab colored power-ups to keep uptime until the clock runs out.",
 };
 
 export const LISTED_GAMES: ListedGame[] = [

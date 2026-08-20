@@ -45,7 +45,7 @@ export function KernelPanicMock({ className }: { className?: ClassValue }) {
     <IdeShell
       className={className}
       windowTitle="Kernel Panic — code-to-play"
-      ariaLabel="Kernel Panic running in a VS Code webview: the Pro Games sidebar highlights Kernel Panic, and the editor tab shows the kernel ship firing at falling segfaults, zombies, and leaks, with a healthy process marked to avoid."
+      ariaLabel="Kernel Panic running in a VS Code webview: the Pro Games sidebar highlights Kernel Panic, and the editor tab shows a compact kernel craft firing at falling segfaults, zombies, and leaks, with a healthy process marked to avoid."
       plays={3}
       selectedGame="Kernel Panic"
     >
@@ -79,7 +79,7 @@ export function KernelPanicMock({ className }: { className?: ClassValue }) {
             Kernel Panic
           </h2>
           <p className="mt-1 text-center text-[10px] text-editor-foreground/55">
-            Fly the kernel. Shoot threats. Leave healthy processes alone.
+            Fly the kernel craft. Shoot threats. Leave healthy processes alone.
           </p>
 
           <div className="mt-3 flex justify-between font-mono text-[10px] text-editor-foreground/70">
@@ -158,11 +158,24 @@ function ThreatCell({ threat }: { threat: Threat }) {
 
 function ShipCell() {
   return (
-    <span
-      className="flex size-full items-center justify-center rounded-[3px] font-mono text-[7px] font-bold text-[#1e1e1e] sm:text-[8px]"
-      style={{ backgroundColor: "#4fc1ff" }}
-    >
-      k
-    </span>
+    <svg viewBox="0 0 32 28" className="size-[95%]" aria-hidden="true">
+      <path d="M12 11 L3 18 L5 22 L13 16 Z" fill="#165a82" />
+      <path d="M20 11 L29 18 L27 22 L19 16 Z" fill="#165a82" />
+      <path d="M12 11 L3 18 L6 18.4 L12 13 Z" fill="#3aa8e0" />
+      <path d="M20 11 L29 18 L26 18.4 L20 13 Z" fill="#3aa8e0" />
+      <rect x="2" y="17" width="5" height="2.2" fill="#c8c8c8" />
+      <rect x="25" y="17" width="5" height="2.2" fill="#c8c8c8" />
+      <path
+        d="M16 1 L20 8 L21.5 15 L20.5 24 L11.5 24 L10.5 15 L12 8 Z"
+        fill="#4fc1ff"
+      />
+      <rect x="15" y="7" width="2" height="12" fill="#9ee7ff" />
+      <rect x="10.2" y="21" width="4.6" height="4" fill="#0b3a52" />
+      <rect x="17.2" y="21" width="4.6" height="4" fill="#0b3a52" />
+      <circle cx="12.5" cy="24.2" r="1.5" fill="#7ee7ff" />
+      <circle cx="19.5" cy="24.2" r="1.5" fill="#7ee7ff" />
+      <path d="M13.2 8 L18.8 8 L17.6 14 L14.4 14 Z" fill="#072433" />
+      <path d="M14.2 9 L17.8 9 L17 13 L15 13 Z" fill="#d7f7ff" />
+    </svg>
   );
 }
