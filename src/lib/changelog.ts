@@ -14,9 +14,32 @@ export type ChangelogRelease = {
 
 export const FALLBACK_CHANGELOG_RELEASES: ChangelogRelease[] = [
   {
+    version: "1.1.0",
+    date: "2026-08-21",
+    latest: true,
+    sections: [
+      {
+        title: "Added",
+        items: [
+          "Pro games: Call Stack, Merge Conflict, and Kernel Panic, with a 7-day Pro trial and extra play spaces.",
+          "Kernel Panic flies a kernel craft with colored power-ups (shield, rapid fire, spread, weaker enemies, score boost, health).",
+          "Kernel Panic is a survival run: no 60-second clock. Threat climbs until HP hits zero.",
+          "Always-visible About this game section on every game.",
+          "Optional stats sync for signed-in players who opt in on the website.",
+        ],
+      },
+      {
+        title: "Changed",
+        items: [
+          "Locked Pro games and exhausted-play toasts point to subscription or extra play spaces.",
+          "Code tracking seeds a baseline when a file is opened so the first edit counts more reliably.",
+        ],
+      },
+    ],
+  },
+  {
     version: "1.0.0",
     date: "2026-08-07",
-    latest: true,
     sections: [
       {
         title: "Changed",

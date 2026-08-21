@@ -4,7 +4,7 @@ BETTER_AUTH_URL=http://localhost:8787
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 
-# Polar (optional locally; required for checkout in preview)
+# Polar
 # POLAR_ACCESS_TOKEN=
 # POLAR_WEBHOOK_SECRET=
 # POLAR_SERVER=sandbox
