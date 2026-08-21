@@ -16,6 +16,7 @@ interface __BaseEnv_CloudflareEnv {
 	POLAR_PRODUCT_PRO_MONTHLY: string;
 	POLAR_PRODUCT_PRO_YEARLY: string;
 	POLAR_PRODUCT_PER_SPACE: string;
+	CRON_SECRET: string;
 	WORKER_SELF_REFERENCE: Fetcher /* code-to-play-web */;
 }
 declare namespace Cloudflare {
@@ -26,5 +27,5 @@ type StringifyValues<EnvType extends Record<string, unknown>> = {
 	[Binding in keyof EnvType]: EnvType[Binding] extends string ? EnvType[Binding] : string;
 };
 declare namespace NodeJS {
-	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "NEXTJS_ENV" | "BETTER_AUTH_SECRET" | "BETTER_AUTH_URL" | "GITHUB_CLIENT_ID" | "GITHUB_CLIENT_SECRET" | "POLAR_ACCESS_TOKEN" | "POLAR_WEBHOOK_SECRET" | "POLAR_SERVER" | "POLAR_PRODUCT_PRO_MONTHLY" | "POLAR_PRODUCT_PRO_YEARLY" | "POLAR_PRODUCT_PER_SPACE">> {}
+	interface ProcessEnv extends StringifyValues<Pick<Cloudflare.Env, "NEXTJS_ENV" | "BETTER_AUTH_SECRET" | "BETTER_AUTH_URL" | "GITHUB_CLIENT_ID" | "GITHUB_CLIENT_SECRET" | "POLAR_ACCESS_TOKEN" | "POLAR_WEBHOOK_SECRET" | "POLAR_SERVER" | "POLAR_PRODUCT_PRO_MONTHLY" | "POLAR_PRODUCT_PRO_YEARLY" | "POLAR_PRODUCT_PER_SPACE" | "CRON_SECRET">> {}
 }

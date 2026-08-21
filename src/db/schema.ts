@@ -124,6 +124,20 @@ export const userStats = sqliteTable("user_stats", {
   syncedAt: integer("synced_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+export const extensionStats = sqliteTable("extension_stats", {
+  id: text("id").primaryKey(),
+  installs: integer("installs").notNull(),
+  version: text("version").notNull(),
+  vscodeEngine: text("vscode_engine").notNull(),
+  fetchedAt: integer("fetched_at", { mode: "timestamp_ms" }).notNull(),
+});
+
+export const extensionChangelog = sqliteTable("extension_changelog", {
+  id: text("id").primaryKey(),
+  markdown: text("markdown").notNull(),
+  fetchedAt: integer("fetched_at", { mode: "timestamp_ms" }).notNull(),
+});
+
 export const userEntitlements = sqliteTable("user_entitlements", {
   userId: text("user_id")
     .primaryKey()

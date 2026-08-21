@@ -11,3 +11,6 @@ GITHUB_CLIENT_SECRET=
 # POLAR_PRODUCT_PRO_MONTHLY=
 # POLAR_PRODUCT_PRO_YEARLY=
 # POLAR_PRODUCT_PER_SPACE=
+
+# Used by Cloudflare cron to refresh Open VSX installs and GitHub changelog.
+CRON_SECRET=

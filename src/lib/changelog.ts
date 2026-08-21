@@ -1,4 +1,4 @@
-import { fetchChangelogMarkdown } from "@/lib/extension-stats";
+import { getChangelogMarkdown } from "@/lib/extension-catalog";
 
 export type ChangelogSection = {
   title: string;
@@ -144,7 +144,7 @@ export function parseChangelog(markdown: string): ChangelogRelease[] {
 }
 
 export async function getChangelogReleases(): Promise<ChangelogRelease[]> {
-  const markdown = await fetchChangelogMarkdown();
+  const markdown = await getChangelogMarkdown();
   if (!markdown) {
     return FALLBACK_CHANGELOG_RELEASES;
   }

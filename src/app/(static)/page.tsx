@@ -10,6 +10,8 @@ import { Separator } from "@/components/ui/separator";
 import { getExtensionStats } from "@/lib/extension-stats";
 import { TRACKED_LANGUAGE_COUNT } from "@/lib/features";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const stats = await getExtensionStats();
 

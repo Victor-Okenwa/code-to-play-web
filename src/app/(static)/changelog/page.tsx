@@ -7,9 +7,10 @@ import { CHANGELOG_URL, OPEN_VSX_URL } from "@/lib/extension";
 
 export const metadata: Metadata = {
   title: "Changelog — Code to Play",
-  description:
-    "Release notes for the Code to Play VS Code extension, from Open VSX.",
+  description: "Release notes for the Code to Play VS Code extension.",
 };
+
+export const dynamic = "force-dynamic";
 
 export default async function ChangelogPage() {
   const releases = await getChangelogReleases();
