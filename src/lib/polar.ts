@@ -6,15 +6,50 @@ export const POLAR_SLUG_PLAY_SPACE = "play-space";
 
 export type PolarServer = "sandbox" | "production";
 
+/**
+ * Secrets piped into `wrangler secret put` often carry a trailing newline or
+ * CR, which silently breaks exact comparisons and Bearer headers.
+ */
+function env(name: string) {
+  return process.env[name]?.trim() ?? "";
+}
+
 export function polarServer(): PolarServer {
-  return process.env.POLAR_SERVER === "production" ? "production" : "sandbox";
+  return env("POLAR_SERVER").toLowerCase() === "production"
+    ? "production"
+    : "sandbox";
+}
+
+export function polarAccessToken() {
+  return env("POLAR_ACCESS_TOKEN");
+}
+
+export function isPolarConfigured() {
+  return polarAccessToken().length > 0;
+}
+
+export const POLAR_NOT_CONFIGURED_MESSAGE =
+  "Billing is not configured on this deployment. Set POLAR_ACCESS_TOKEN and POLAR_SERVER on the Worker.";
+
+export function polarErrorMessage(
+  error: unknown,
+  fallback = "Checkout could not start.",
+) {
+  if (error instanceof Error && error.message) {
+    const cause =
+      error.cause instanceof Error && error.cause.message
+        ? error.cause.message
+        : null;
+    return cause ? `${error.message}: ${cause}` : error.message;
+  }
+  return fallback;
 }
 
 export function polarProductIds() {
   return {
-    proMonthly: process.env.POLAR_PRODUCT_PRO_MONTHLY ?? "",
-    proYearly: process.env.POLAR_PRODUCT_PRO_YEARLY ?? "",
-    playSpace: process.env.POLAR_PRODUCT_PER_SPACE ?? "",
+    proMonthly: env("POLAR_PRODUCT_PRO_MONTHLY"),
+    proYearly: env("POLAR_PRODUCT_PRO_YEARLY"),
+    playSpace: env("POLAR_PRODUCT_PER_SPACE"),
   };
 }
 
@@ -40,7 +75,7 @@ export function isProProduct(productId: string | null | undefined) {
 }
 
 export function polarAppOrigin(request: Request) {
-  const configured = process.env.BETTER_AUTH_URL;
+  const configured = env("BETTER_AUTH_URL");
   if (configured) {
     try {
       return new URL(configured).origin;
@@ -67,7 +102,7 @@ export function polarProductIdForSlug(slug: string) {
 
 export function getPolar() {
   return new Polar({
-    accessToken: process.env.POLAR_ACCESS_TOKEN ?? "",
+    accessToken: polarAccessToken(),
     server: polarServer(),
   });
 }

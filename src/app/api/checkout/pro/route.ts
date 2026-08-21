@@ -1,30 +1,29 @@
 import { NextResponse } from "next/server";
 import {
   getPolar,
+  isPolarConfigured,
+  POLAR_NOT_CONFIGURED_MESSAGE,
   POLAR_SLUG_PRO_MONTHLY,
   POLAR_SLUG_PRO_YEARLY,
   polarAppOrigin,
+  polarErrorMessage,
   polarProductIdForSlug,
 } from "@/lib/polar";
 import { getRequestSession } from "@/lib/session";
 
 const PRO_SLUGS = new Set([POLAR_SLUG_PRO_MONTHLY, POLAR_SLUG_PRO_YEARLY]);
 
-function polarErrorMessage(error: unknown) {
-  if (error instanceof Error && error.message) {
-    const cause =
-      error.cause instanceof Error && error.cause.message
-        ? error.cause.message
-        : null;
-    return cause ? `${error.message}: ${cause}` : error.message;
-  }
-  return "Checkout could not start.";
-}
-
 export async function POST(request: Request) {
   const session = await getRequestSession(request);
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  if (!isPolarConfigured()) {
+    return NextResponse.json(
+      { error: POLAR_NOT_CONFIGURED_MESSAGE },
+      { status: 503 },
+    );
   }
 
   let body: unknown;
